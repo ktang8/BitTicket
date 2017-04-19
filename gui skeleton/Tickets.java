@@ -10,11 +10,13 @@ public class Tickets {
 	private String submittedBy;
 	private int priority;
 	private List<Comments> lComments;
-	
-	public Tickets(){
-		
+
+	public Tickets() {
+
 	}
-	public Tickets(int newTID, String newDateCreated, String newLastUpdated, String newStatus, String newTitle, String newDescription, String newSubmittedBy, int newPriority, List<Comments> newLComments){
+
+	public Tickets(int newTID, String newDateCreated, String newLastUpdated, String newStatus, String newTitle,
+			String newDescription, String newSubmittedBy, int newPriority, List<Comments> newLComments) {
 		tID = newTID;
 		dateCreated = newDateCreated;
 		lastUpdated = newLastUpdated;
@@ -96,5 +98,12 @@ public class Tickets {
 
 	public void setlComments(List<Comments> lComments) {
 		this.lComments = lComments;
+	}
+
+	@Override
+	public String toString() {
+		return "Tickets [tID=" + tID + ", dateCreated=" + dateCreated + ", lastUpdated=" + lastUpdated + ", status="
+				+ status + ", title=" + title + ", description=" + description + ", submittedBy=" + submittedBy
+				+ ", priority=" + priority + ", lComments=" + lComments + "]";
 	}
 }
