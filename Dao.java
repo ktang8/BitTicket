@@ -97,11 +97,35 @@ public class Dao extends {
 			System.out.print(e.getMessage());
 			System.exit(0)
 		}
+	}/*
+	 * createBD- method that creates the necessary Database table to perform the analysis
+	 */
+	public void createTicketTable(){
+		try{
+			
+			System.out.println("Attempting to create table...");
+			
+			String query = "CREATE TABLE " + ticketsTable + 
+					"(pid INTEGER NOT NULL AUTO_INCREMENT, " +
+					"id VARCHAR(7), " +
+					"tid INTEGER UNIQUE, " +
+					"dateCreated VARCHAR(), " +
+					"PRIMARY KEY ( pid ))";
+			stmt.executeUpdate(query);
+			System.out.println("Table W_MEI_tab created...");
+		
+	
+		}catch (SQLException e){
+			System.out.println("Table 'W_MEI_tab' already exist");
+		}catch(Exception e){
+			System.out.print(e.getMessage());
+			System.exit(0)
+		}
 	}
 	/*
 	 * insertDB - populates the table that createDB creates with the BankRecords
 	 */
-	public void insertRecords(BankRecords [] bankrec){
+	public void submitTicket(BankRecords [] bankrec){
 		try{
 
 			System.out.println("Inserting Rows into Table, this may take a while...");
@@ -109,7 +133,7 @@ public class Dao extends {
 			for(int i=0;i<recs.length;i++){
 				BankRecords br=bankrec[i];
 				// The sql query that will populate the database table BankRecords
-				String sql=	"INSERT INTO W_MEI_tab (ID, INCOME, PEP) VALUES('"+
+				String sql=	"INSERT INTO " + ticketsTable +" (ID, INCOME, PEP) VALUES('"+
 							br.getId()+"', "+
 							br.getIncome()+", '"+
 							br.getPep()+"');";
