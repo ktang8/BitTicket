@@ -1,38 +1,39 @@
 import java.util.List;
 
 public class Tickets {
-	private int tID;
+	private String tID;
 	private String dateCreated;
 	private String lastUpdated;
 	private String status;
 	private String title;
 	private String description;
-	private String submittedBy;
+	private String submitter;
 	private int priority;
+	private String category;
 	private List<Comments> lComments;
 
 	public Tickets() {
 
 	}
 
-	public Tickets(int newTID, String newDateCreated, String newLastUpdated, String newStatus, String newTitle,
-			String newDescription, String newSubmittedBy, int newPriority, List<Comments> newLComments) {
+	public Tickets(String newTID, String newDateCreated, String newLastUpdated, String newStatus, String newTitle,
+			String newDescription, String newSubmitter, int newPriority, String newCategory) {
 		tID = newTID;
 		dateCreated = newDateCreated;
 		lastUpdated = newLastUpdated;
 		status = newStatus;
 		title = newTitle;
 		description = newDescription;
-		submittedBy = newSubmittedBy;
+		submitter = newSubmitter;
 		priority = newPriority;
-		lComments = newLComments;
+		category = newCategory;
 	}
 
-	public int gettID() {
+	public String gettID() {
 		return tID;
 	}
 
-	public void settID(int tID) {
+	public void settID(String tID) {
 		this.tID = tID;
 	}
 
@@ -76,12 +77,12 @@ public class Tickets {
 		this.description = description;
 	}
 
-	public String getSubmittedBy() {
-		return submittedBy;
+	public String getSubmitter() {
+		return submitter;
 	}
 
-	public void setSubmittedBy(String submittedBy) {
-		this.submittedBy = submittedBy;
+	public void setSubmitter(String submitter) {
+		this.submitter = submitter;
 	}
 
 	public int getPriority() {
@@ -100,10 +101,18 @@ public class Tickets {
 		this.lComments = lComments;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	@Override
 	public String toString() {
 		return "Tickets [tID=" + tID + ", dateCreated=" + dateCreated + ", lastUpdated=" + lastUpdated + ", status="
-				+ status + ", title=" + title + ", description=" + description + ", submittedBy=" + submittedBy
+				+ status + ", title=" + title + ", description=" + description + ", submitter=" + submitter
 				+ ", priority=" + priority + ", lComments=" + lComments + "]";
 	}
 }
