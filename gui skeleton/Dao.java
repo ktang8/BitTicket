@@ -38,7 +38,7 @@ public class Dao {
 //		submitTicket(new Tickets("20170420141350", "2017-04-20 14:13:50", "2017-04-20 14:13:50", "open", "testTitle",
 //				"testDescription", "ktang", 3, "testCategory"));
 //		addComment(new Comments("20170420141334", "Testing Comments", "2017-04-20 14:47:48"));
-		updateQuery("w_mei_comments", "comment='new comment', commentDate='2017-04-20 15:05:35'", "tid='20170420141334' and pid=1");
+//		updateQuery("w_mei_comments", "comment='new comment', commentDate='2017-04-20 15:05:35'", "tid='20170420141334' and pid=1");
     }
 	
 	/*
