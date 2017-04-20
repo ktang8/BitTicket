@@ -1,7 +1,6 @@
 package controllers;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.TextField;
 import models.LoginModel;
 import javafx.event.ActionEvent;
