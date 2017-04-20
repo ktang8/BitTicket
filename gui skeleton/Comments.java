@@ -1,18 +1,17 @@
 
 public class Comments {
 	private int cID;
-	private int tID;
+	private String tID;
 	private String comment;
-	private String dateCreated;
+	private String commentDate;
 
 	public Comments() {
 	}
 
-	public Comments(int newCID, int newTID, String newComment, String newDateCreated) {
-		cID = newCID;
+	public Comments(String newTID,String newComment, String newCommentDate) {
 		tID = newTID;
 		comment = newComment;
-		dateCreated = newDateCreated;
+		commentDate = newCommentDate;
 	}
 
 	public int getcID() {
@@ -23,11 +22,11 @@ public class Comments {
 		this.cID = cID;
 	}
 
-	public int gettID() {
+	public String gettID() {
 		return tID;
 	}
 
-	public void settID(int tID) {
+	public void settID(String tID) {
 		this.tID = tID;
 	}
 
@@ -39,16 +38,16 @@ public class Comments {
 		this.comment = comment;
 	}
 
-	public String getDateCreated() {
-		return dateCreated;
+	public String getCommentDate() {
+		return commentDate;
 	}
 
-	public void setDateCreated(String dateCreated) {
-		this.dateCreated = dateCreated;
+	public void setCommentDate(String commentDate) {
+		this.commentDate = commentDate;
 	}
 
 	@Override
 	public String toString() {
-		return "Comments [cID=" + cID + ", tID=" + tID + ", comment=" + comment + ", dateCreated=" + dateCreated + "]";
+		return "Comments [cID=" + cID + ", tID=" + tID + ", comment=" + comment + ", commentDate=" + commentDate + "]";
 	}
 }
