@@ -5,8 +5,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import models.MainModel;
+import objects.Tickets;
 
 public class MainController {
+	public static Tickets selectedTicket;
+	
 	@FXML
 	private Button logout;
 	@FXML

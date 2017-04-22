@@ -44,6 +44,19 @@ public class TicketController {
 	
 	@FXML
 	public void clickUpdateButton(){
+		if(this.title.getText().length()>150){
+			System.out.println("Title length was greater than 150 char.");
+			return;
+		}else if(this.title.getText().length()<=0){
+			System.out.println("Title length cannot be empty");
+			return;
+		}else if(this.description.getText().length()>250){
+			System.out.println("Description length was greater than 250 char.");
+			return;
+		}else if(this.description.getText().length()<=0){
+			System.out.println("Description length cannot be empty");
+			return;
+		}
 		
 	}
 	
