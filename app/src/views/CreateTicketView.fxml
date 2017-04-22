@@ -28,6 +28,9 @@
                     <String fx:value="Close" />
                 </FXCollections>
             </items>
+            <value>
+		        <String fx:value="Open" />
+		    </value>
       </ComboBox>
       <ComboBox fx:id="priority" layoutX="392.0" layoutY="95.0" prefHeight="25.0" prefWidth="171.0">
       		<items>
@@ -37,6 +40,9 @@
                     <String fx:value="3" />
                 </FXCollections>
             </items>
+            <value>
+		        <String fx:value="1" />
+		    </value>
       </ComboBox>
    </children>
 </AnchorPane>

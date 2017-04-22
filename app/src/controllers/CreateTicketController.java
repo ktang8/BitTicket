@@ -5,7 +5,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,7 +36,13 @@ public class CreateTicketController{
 	@FXML
 	public void createTicket() throws IOException{
 		CreateTicketModel ctm = new CreateTicketModel();
-		
+		if(this.title.getText().length()>150){
+			System.out.println("Title length was greater than 150 char.");
+			return;
+		}else if(this.description.getText().length()>250){
+			System.out.println("Description length was greater than 250 char.");
+			return;
+		}
 		String newTitle = this.title.getText();
 		String newDescription = this.description.getText();
 		int newPriority = Integer.parseInt(this.priority.getValue());
@@ -84,5 +89,13 @@ public class CreateTicketController{
 			System.out.println("failed to logout: " + e);
 			
 		}
+	}
+	
+	public ComboBox<String> getCategoryComboBox(){
+		return category;
+	}
+	
+	public ComboBox<String> getPriorityComboBox(){
+		return priority;
 	}
 }
