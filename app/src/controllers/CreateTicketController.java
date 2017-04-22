@@ -9,6 +9,7 @@ import models.CreateTicketModel;
 import objects.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 
 public class CreateTicketController extends Dao {
 	@FXML
@@ -30,15 +31,15 @@ public class CreateTicketController extends Dao {
 	public void createTicket(){
 		String newTitle = this.title.getText();
 		String newDescription = this.description.getText();
-		int newPriority = this.priority.getValue();
-		String newCategory = this.category.getValue();
+		int newPriority = (int) this.priority.getValue();
+		String newCategory = (String) this.category.getValue();
 		
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		DateFormat ticketID = new SimpleDateFormat("yyyyMMddHHmmss");
 		
-		Ticket newTicket = new Tickets(ticketID.format(date), dateFormat.format(date), dateFormat.format(date), "Open", newTitle,
-				newDescription, currentUser.getUsername(), newPriority, String newCategory);
+		Tickets newTicket = new Tickets(ticketID.format(date), dateFormat.format(date), dateFormat.format(date), "Open", newTitle,
+				newDescription, "currentUser.getUsername()", newPriority, newCategory);
 		
 		submitTicket(newTicket);
 	}
