@@ -1,22 +1,22 @@
 package controllers;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import models.CreateTicketModel;
-import objects.*;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.io.IOException;
-import java.text.DateFormat;
+import objects.Tickets;
 
 public class CreateTicketController{
 	@FXML
@@ -35,7 +35,7 @@ public class CreateTicketController{
 	private ComboBox<String> category;
 
 	@FXML
-	public void createTicket(){
+	public void createTicket() throws IOException{
 		CreateTicketModel ctm = new CreateTicketModel();
 		
 		String newTitle = this.title.getText();
@@ -51,24 +51,38 @@ public class CreateTicketController{
 				newDescription, "ktang", newPriority, newCategory);
 		
 		ctm.createTicket(newTicket);
+		backToMainView();
 	}
-
+	
 	@FXML
-	private void ButtonAction(ActionEvent event) throws IOException {
-		Stage stage;
+	public void backToMainView() {
+		Stage stage = (Stage) back.getScene().getWindow();
 		Parent root;
-		if (event.getSource() == logout) {
-			// get reference to the button's stage
-			stage = (Stage) logout.getScene().getWindow();
-			// load up OTHER FXML document
-			root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
-		} else {
-			stage = (Stage) back.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("/view/MainView.fxml"));
+		try {
+			root = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("failed to go back to MainView: " + e);
+			
 		}
-		// create a new scene with root and set the stage
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+	}
+	
+	@FXML
+	public void logout() {
+		Stage stage = (Stage) back.getScene().getWindow();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("failed to logout: " + e);
+			
+		}
 	}
 }
