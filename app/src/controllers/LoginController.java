@@ -2,11 +2,15 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import jdk.nashorn.internal.runtime.UserAccessorProperty;
 import models.LoginModel;
+import objects.Users;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class LoginController {
+	public static Users currentUser;
+	
 	@FXML
 	private TextField username;
 	@FXML

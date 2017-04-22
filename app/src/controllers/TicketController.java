@@ -1,11 +1,15 @@
 package controllers;
 
-import javafx.fxml.FXML;
+import java.io.IOException;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
-
+import javafx.stage.Stage;
 import javafx.scene.control.ListView;
 
 import javafx.scene.control.TextArea;
@@ -37,5 +41,27 @@ public class TicketController {
 	private ChoiceBox priority;
 	@FXML
 	private ChoiceBox category;
+	
+	@FXML
+	public void clickUpdateButton(){
+		
+	}
+	
+	@FXML
+	public void logout() {
+		Stage stage = (Stage) logout.getScene().getWindow();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("failed to logout: " + e);
+		}finally{
+			LoginController.currentUser = null;
+		}
+	}
 
 }

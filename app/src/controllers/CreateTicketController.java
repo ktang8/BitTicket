@@ -35,7 +35,6 @@ public class CreateTicketController{
 
 	@FXML
 	public void createTicket() throws IOException{
-		CreateTicketModel ctm = new CreateTicketModel();
 		if(this.title.getText().length()>150){
 			System.out.println("Title length was greater than 150 char.");
 			return;
@@ -61,6 +60,7 @@ public class CreateTicketController{
 		Tickets newTicket = new Tickets(ticketID.format(date), dateFormat.format(date), dateFormat.format(date), "Open", newTitle,
 				newDescription, "ktang", newPriority, newCategory);
 		
+		CreateTicketModel ctm = new CreateTicketModel();
 		ctm.createTicket(newTicket);
 		backToMainView();
 	}
@@ -83,7 +83,7 @@ public class CreateTicketController{
 	
 	@FXML
 	public void logout() {
-		Stage stage = (Stage) back.getScene().getWindow();
+		Stage stage = (Stage) logout.getScene().getWindow();
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
@@ -93,15 +93,8 @@ public class CreateTicketController{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("failed to logout: " + e);
-			
+		}finally{
+			LoginController.currentUser = null;
 		}
-	}
-	
-	public ComboBox<String> getCategoryComboBox(){
-		return category;
-	}
-	
-	public ComboBox<String> getPriorityComboBox(){
-		return priority;
 	}
 }
