@@ -29,7 +29,7 @@ public class CreateTicketController{
 	@FXML
 	private Button submit;
 	@FXML
-	private ComboBox<String> priority;
+	private ComboBox<Integer> priority;
 	@FXML
 	private ComboBox<String> category;
 
@@ -50,11 +50,11 @@ public class CreateTicketController{
 		}
 		String newTitle = this.title.getText();
 		String newDescription = this.description.getText();
-		int newPriority = Integer.parseInt(this.priority.getValue());
+		int newPriority = this.priority.getValue();
 		String newCategory = (String) this.category.getValue();
 		
 		Date date = new Date();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		DateFormat ticketID = new SimpleDateFormat("yyyyMMddHHmmss");
 		
 		Tickets newTicket = new Tickets(ticketID.format(date), dateFormat.format(date), dateFormat.format(date), "Open", newTitle,

@@ -12,9 +12,9 @@ public class Dao {
 	static Connection c= null;
 	static Statement stmt = null;
 
-	final String usersTable = "w_mei_users";
-	final String ticketsTable = "w_mei_tickets";
-	final String commentsTable = "w_mei_comments";
+	public final String usersTable = "w_mei_users";
+	public final String ticketsTable = "w_mei_tickets";
+	public final String commentsTable = "w_mei_comments";
 
 	
 
@@ -254,6 +254,29 @@ public class Dao {
 		}
 		
 		return rs;
+	}
+	
+	public Users getUser(String where){
+		String sql = "SELECT * FROM " + usersTable + "  WHERE " + where;
+		ResultSet rs = null;
+
+		Users u=null;
+		try{
+			startConnection();
+			System.out.println("Running select query...");
+			rs = stmt.executeQuery(sql);
+			
+			//rs will be closed later after it is printed out.
+			System.out.println("Query completed...");
+			rs.next();
+			u = new Users(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("privilege"));
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		}finally{
+			closeConnection();
+		}
+		
+		return u;
 	}
 	
 	/*

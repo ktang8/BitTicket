@@ -9,7 +9,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class LoginController {
-	public static Users currentUser;
+	public static Users currentUser = new Users("ktang", "qwer", "kevin", "tang", 2);
 	
 	@FXML
 	private TextField username;

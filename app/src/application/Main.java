@@ -30,7 +30,7 @@ public class Main extends Application {
 			
 			
 			//load LoginView
-			FXMLLoader loader = new  FXMLLoader(getClass().getResource("/views/CreateTicketView.fxml"));
+			FXMLLoader loader = new  FXMLLoader(getClass().getResource("/views/TicketView.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

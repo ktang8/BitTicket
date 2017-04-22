@@ -8,7 +8,9 @@ import models.MainModel;
 import objects.Tickets;
 
 public class MainController {
-	public static Tickets selectedTicket;
+	public static Tickets selectedTicket = new Tickets("20170420141305", "2017-04-20 14:13:05",
+			 "2017-04-20 14:13:05", "open", "testTitle", "testDescription",
+			 "ktang", 3, "Open");
 	
 	@FXML
 	private Button logout;
