@@ -37,6 +37,9 @@ public class MainController {
 	@FXML
 	private TableView table;
 	
+	@FXML
+	private Button submit;
+	
 	public void initialize() throws ParseException, SQLException {
 		ObservableList<ObservableList> data;
 		TableView tableview = new TableView();
@@ -48,7 +51,7 @@ public class MainController {
 			/**********************************
 	         * TABLE COLUMN ADDED DYNAMICALLY *
 	         **********************************/
-	        for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+	        for(int i=1 ; i<rs.getMetaData().getColumnCount(); i++){
 	            //We are using non property style for making dynamic table
 	            final int j = i;                
 	            TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
@@ -121,6 +124,21 @@ public class MainController {
 		}
 	}
 	
+	@FXML
+	public void submit() {
+		Stage stage = (Stage) submit.getScene().getWindow();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/views/CreateTicketView.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("failed to go to CreateTicketView: " + e);
+		}
+	}
+	
 	public void toTicketView(){
 		Stage stage = (Stage) table.getScene().getWindow();
 		Parent root;
@@ -131,7 +149,7 @@ public class MainController {
 			stage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("failed to go TicketView: " + e);
+			System.out.println("failed to go to TicketView: " + e);
 		}
 	}
 }

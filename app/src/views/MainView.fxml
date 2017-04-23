@@ -10,5 +10,6 @@
       <TableView fx:id="table" layoutY="71.0" prefHeight="237.0" prefWidth="595.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="71.0">
       </TableView>
       <Button disable="true" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" text="Users" />
+      <Button fx:id="submit" layoutX="380.0" layoutY="20.0" mnemonicParsing="false" onAction="#submit" text="Submit a Ticket" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="20.0" />
    </children>
 </AnchorPane>
