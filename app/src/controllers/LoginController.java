@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -32,6 +34,10 @@ public class LoginController {
 		
 		if (currentUser == null || !currentUser.getPassword().equals(password)){
 			System.out.println("Incorrect username or password");
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Warning Dialog");
+			alert.setHeaderText("Invalid username or password.");
+			alert.showAndWait();
 			return;
 		}else{
 			Stage stage = (Stage) login.getScene().getWindow();
