@@ -43,7 +43,6 @@ public class LoginController {
 				stage.show();
 			} catch (IOException e) {
 				System.out.println("failed to go back to MainView: " + e);
-				
 			}
 		}
 	}
