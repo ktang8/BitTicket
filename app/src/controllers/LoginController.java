@@ -25,6 +25,10 @@ public class LoginController {
 	private Button login;
 	
 	@FXML
+	public void onEnter() throws IOException{
+		login();
+	}
+	@FXML
 	public void login() throws IOException {
 		String username = this.username.getText();
 		String password = this.password.getText();
