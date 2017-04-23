@@ -1,8 +1,5 @@
 package models;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import objects.*;
 
 public class TicketModel extends Dao {
@@ -14,7 +11,7 @@ public class TicketModel extends Dao {
 		updateQuery(table, updateValues, where);
 	}
 	
-	public Users getSubmitterUser(String username) throws SQLException{
-		return getUser("username='" + username + "'");
+	public Users getSubmitterUser(String username) {
+		return getUser(username);
 	}
 }

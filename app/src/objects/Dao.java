@@ -256,10 +256,9 @@ public class Dao {
 		return rs;
 	}
 	
-	public Users getUser(String where){
-		String sql = "SELECT * FROM " + usersTable + "  WHERE " + where;
+	public Users getUser(String username){
+		String sql = "SELECT * FROM " + usersTable + "  WHERE username='" + username + "'";
 		ResultSet rs = null;
-
 		Users u=null;
 		try{
 			startConnection();
@@ -275,7 +274,6 @@ public class Dao {
 		}finally{
 			closeConnection();
 		}
-		
 		return u;
 	}
 	
