@@ -1,5 +1,9 @@
 package models;
 
-public class CreateTicketModel {
+import objects.*;
 
+public class CreateTicketModel extends Dao{
+	public void createTicket(Tickets t){
+		submitTicket(t);
+	}
 }
