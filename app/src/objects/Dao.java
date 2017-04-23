@@ -267,8 +267,9 @@ public class Dao {
 			
 			//rs will be closed later after it is printed out.
 			System.out.println("Query completed...");
-			rs.next();
-			u = new Users(rs.getString("username"), rs.getString("pass"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("privilege"));
+			if (rs.next()){
+				u = new Users(rs.getString("username"), rs.getString("pass"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("privilege"));
+			}
 		} catch(SQLException e){
 			System.out.println(e.getMessage());
 		}finally{
