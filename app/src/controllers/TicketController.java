@@ -51,6 +51,8 @@ public class TicketController {
 	private ComboBox<Integer> priority;
 	@FXML
 	private ComboBox<String> category;
+	@FXML
+	private ComboBox<String> status;
 	
 	@FXML
 	public void initialize() throws ParseException, SQLException {
@@ -65,6 +67,7 @@ public class TicketController {
 		
 		category.setValue(MainController.selectedTicket.getCategory());
 		priority.setValue(MainController.selectedTicket.getPriority());
+		status.setValue(MainController.selectedTicket.getStatus());
 		title.setText(MainController.selectedTicket.getTitle());
 		description.setText(MainController.selectedTicket.getDescription());
 		
@@ -99,6 +102,7 @@ public class TicketController {
 		MainController.selectedTicket.setDescription(description.getText());
 		MainController.selectedTicket.setCategory(category.getValue());
 		MainController.selectedTicket.setPriority(priority.getValue());
+		MainController.selectedTicket.setStatus(status.getValue());
 		MainController.selectedTicket.setLastUpdated(dateFormat.format(date));
 		
 		TicketModel tm = new TicketModel();
