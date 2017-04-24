@@ -1,5 +1,8 @@
 package models;
 
-public class MainModel {
+import objects.*;
 
+public class MainModel extends Dao{
+
+	
 }

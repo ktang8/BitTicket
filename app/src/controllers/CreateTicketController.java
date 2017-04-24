@@ -29,7 +29,7 @@ public class CreateTicketController{
 	@FXML
 	private Button submit;
 	@FXML
-	private ComboBox<Integer> priority;
+	private ComboBox<String> priority;
 	@FXML
 	private ComboBox<String> category;
 
@@ -50,7 +50,7 @@ public class CreateTicketController{
 		}
 		String newTitle = this.title.getText();
 		String newDescription = this.description.getText();
-		int newPriority = this.priority.getValue();
+		int newPriority = Integer.parseInt(this.priority.getValue());
 		String newCategory = (String) this.category.getValue();
 		
 		Date date = new Date();
@@ -62,7 +62,9 @@ public class CreateTicketController{
 		
 		CreateTicketModel ctm = new CreateTicketModel();
 		ctm.createTicket(newTicket);
-		backToMainView();
+		
+		MainController.selectedTicket = newTicket;
+		toTicketView();
 	}
 	
 	@FXML
@@ -96,5 +98,21 @@ public class CreateTicketController{
 		}finally{
 			LoginController.currentUser = null;
 		}
+	}
+	
+	public void toTicketView(){
+		Stage stage = (Stage) submit.getScene().getWindow();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/views/TicketView.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("failed to go to TicketView: " + e);
+			
+		}	
+		
 	}
 }

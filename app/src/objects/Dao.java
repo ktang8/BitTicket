@@ -250,7 +250,7 @@ public class Dao {
 		} catch(SQLException e){
 			System.out.println(e.getMessage());
 		}finally{
-			closeConnection();
+			//closeConnection();
 		}
 		
 		return rs;
@@ -276,6 +276,30 @@ public class Dao {
 			closeConnection();
 		}
 		return u;
+	}
+	
+	public Tickets getTicket(String ticketID){
+		String sql = "SELECT * FROM " + ticketsTable + "  WHERE tid='" + ticketID + "'";
+		ResultSet rs = null;
+		Tickets tic=null;
+		try{
+			startConnection();
+			System.out.println("Running select query...");
+			rs = stmt.executeQuery(sql);
+			
+			//rs will be closed later after it is printed out.
+			System.out.println("Query completed...");
+			if (rs.next()){
+				tic = new Tickets(rs.getString("tid"), rs.getString("dateCreated"), rs.getString("lastUpdated"), 
+						rs.getString("status"), rs.getString("title"), rs.getString("description"), rs.getNString("submitter"), 
+						rs.getInt("priority"), rs.getString("category"));
+			}
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		}finally{
+			closeConnection();
+		}
+		return tic;
 	}
 	
 	/*
