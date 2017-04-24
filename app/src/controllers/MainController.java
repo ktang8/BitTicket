@@ -108,14 +108,16 @@ public class MainController {
 		try{
 			for(int i=1 ; i<rs.getMetaData().getColumnCount(); i++){
 	            //We are using non property style for making dynamic table
-	            final int j = i;                
-	            TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-	            col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
-	                public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
-	                    return new SimpleStringProperty(param.getValue().get(j).toString());                        
-	                }                    
-	            });
-	            table.getColumns().addAll(col);
+	            final int j = i;
+	            if(!rs.getMetaData().getColumnName(i+1).equals("description")){
+		            TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+		            col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+		                public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+		                    return new SimpleStringProperty(param.getValue().get(j).toString());                        
+		                }                    
+		            });
+		            table.getColumns().addAll(col);
+	            }
 			}
 		
 			while(rs.next()){
