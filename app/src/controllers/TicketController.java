@@ -78,6 +78,7 @@ public class TicketController {
 		status.setValue(MainController.selectedTicket.getStatus());
 		title.setText(MainController.selectedTicket.getTitle());
 		description.setText(MainController.selectedTicket.getDescription());
+		assignee.setValue(MainController.selectedTicket.getAssignee());
 		
 		TicketModel tm = new TicketModel();
 		Users submittedUser =tm.getSubmitterUser(submitter.getText());

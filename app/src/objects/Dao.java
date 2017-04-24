@@ -293,6 +293,7 @@ public class Dao {
 				tic = new Tickets(rs.getString("tid"), rs.getString("dateCreated"), rs.getString("lastUpdated"), 
 						rs.getString("status"), rs.getString("title"), rs.getString("description"), rs.getNString("submitter"), 
 						rs.getInt("priority"), rs.getString("category"));
+				tic.setAssignee(rs.getString("assignee"));
 			}
 		} catch(SQLException e){
 			System.out.println(e.getMessage());
