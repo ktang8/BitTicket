@@ -13,6 +13,7 @@ public class Tickets {
 	private int priority;
 	private String category;
 	private List<Comments> lComments;
+	private String assignee;
 
 	public Tickets() {
 
@@ -109,6 +110,14 @@ public class Tickets {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
 	}
 
 	@Override
