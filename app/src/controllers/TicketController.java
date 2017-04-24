@@ -43,13 +43,11 @@ public class TicketController {
 	@FXML
 	private TextArea description;
 	@FXML
-	private TextField comments;
+	private TextArea comments;
 	@FXML
 	private Button back;
 	@FXML
 	private Button edit;
-	@FXML
-	private Button addcomment;
 	@FXML
 	private ComboBox<String> priority;
 	@FXML
@@ -78,11 +76,13 @@ public class TicketController {
 		status.setValue(MainController.selectedTicket.getStatus());
 		title.setText(MainController.selectedTicket.getTitle());
 		description.setText(MainController.selectedTicket.getDescription());
+		assignee.setValue(MainController.selectedTicket.getAssignee());
 		
 		TicketModel tm = new TicketModel();
 		Users submittedUser =tm.getSubmitterUser(submitter.getText());
+		edit.setDisable(false);
 		if(LoginController.currentUser.getPrivilege() > submittedUser.getPrivilege() || LoginController.currentUser.getUsername().equals(submittedUser.getUsername())){
-			edit.setDisable(false);
+			//edit.setDisable(false);
 			description.setDisable(false);
 			title.setDisable(false);
 			status.setDisable(false);

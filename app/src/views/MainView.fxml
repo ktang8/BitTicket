@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
    <children>
       <Button fx:id="logout" layoutX="526.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Logout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
-      <TableView fx:id="table" layoutY="71.0" prefHeight="237.0" prefWidth="595.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="71.0">
-      </TableView>
-      <Button disable="true" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" text="Users" />
+      <Button disable="true" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" text="Users" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="23.0" />
       <Button fx:id="submit" layoutX="380.0" layoutY="20.0" mnemonicParsing="false" onAction="#submit" text="Submit a Ticket" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="20.0" />
+      <TabPane layoutX="8.0" layoutY="56.0" prefHeight="351.0" prefWidth="574.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+        <tabs>
+          <Tab text="Assigned Tickets">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="212.0" prefWidth="574.0">
+                     <children>
+                        <TableView fx:id="assignedTable" prefHeight="316.0" prefWidth="574.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Active Tickets">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="activeTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Closed Tickets">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="closedTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>
