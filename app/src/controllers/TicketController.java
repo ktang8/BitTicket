@@ -37,6 +37,8 @@ public class TicketController {
 	@FXML
 	private TextField dateCreated;
 	@FXML
+	private TextField dateUpdated;
+	@FXML
 	private TextField title;
 	@FXML
 	private TextArea description;
@@ -49,7 +51,7 @@ public class TicketController {
 	@FXML
 	private Button addcomment;
 	@FXML
-	private ComboBox<Integer> priority;
+	private ComboBox<String> priority;
 	@FXML
 	private ComboBox<String> category;
 	@FXML
@@ -68,8 +70,11 @@ public class TicketController {
 		String newDateFormat = newFormat.format(date);
 		dateCreated.setText(newDateFormat);
 		
+		date = original.parse(MainController.selectedTicket.getLastUpdated());
+		dateUpdated.setText(newFormat.format(date));
+		
 		category.setValue(MainController.selectedTicket.getCategory());
-		priority.setValue(MainController.selectedTicket.getPriority());
+		priority.setValue(MainController.selectedTicket.getPriority()+"");
 		status.setValue(MainController.selectedTicket.getStatus());
 		title.setText(MainController.selectedTicket.getTitle());
 		description.setText(MainController.selectedTicket.getDescription());
@@ -111,13 +116,14 @@ public class TicketController {
 		MainController.selectedTicket.setTitle(title.getText());
 		MainController.selectedTicket.setDescription(description.getText());
 		MainController.selectedTicket.setCategory(category.getValue());
-		MainController.selectedTicket.setPriority(priority.getValue());
+		MainController.selectedTicket.setPriority(Integer.parseInt(priority.getValue()));
 		MainController.selectedTicket.setStatus(status.getValue());
 		MainController.selectedTicket.setLastUpdated(dateFormat.format(date));
 		MainController.selectedTicket.setAssignee(assignee.getValue());
 		
 		TicketModel tm = new TicketModel();
 		tm.updateTicket(MainController.selectedTicket);
+		tm.showPopupMessage("Ticket Updated", (Stage) edit.getScene().getWindow());
 	}
 	
 	@FXML
