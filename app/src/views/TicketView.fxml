@@ -77,5 +77,6 @@
       <Label layoutX="297.0" layoutY="99.0" prefHeight="16.0" prefWidth="92.0" text="Last Updated:" />
       <TextField fx:id="dateUpdated" disable="true" layoutX="391.0" layoutY="95.0" text="DATETIME" />
       <TextArea fx:id="comments" layoutX="39.0" layoutY="373.0" prefHeight="156.0" prefWidth="551.0" />
+      <Button fx:id="deleteTicket" disable="true" layoutX="291.0" layoutY="547.0" mnemonicParsing="false" onAction="#deleteTicket" text="Delete Ticket" />
    </children>
 </AnchorPane>

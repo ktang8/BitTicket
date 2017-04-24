@@ -49,6 +49,8 @@ public class TicketController {
 	@FXML
 	private Button edit;
 	@FXML
+	private Button deleteTicket;
+	@FXML
 	private ComboBox<String> priority;
 	@FXML
 	private ComboBox<String> category;
@@ -92,6 +94,7 @@ public class TicketController {
 		if(LoginController.currentUser.getPrivilege()==3){
 			assignee.setDisable(false);
 			assignee.getItems().addAll(tm.getAllUsers());
+			deleteTicket.setDisable(false);
 		}
 	}
 	
@@ -157,6 +160,13 @@ public class TicketController {
 		}finally{
 			LoginController.currentUser = null;
 		}
+	}
+	
+	@FXML
+	public void deleteTicket(){
+		TicketModel tm = new TicketModel();
+		tm.deleteTicket(MainController.selectedTicket);
+		backToMainView();
 	}
 
 }

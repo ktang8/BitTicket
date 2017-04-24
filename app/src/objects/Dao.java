@@ -185,6 +185,24 @@ public class Dao {
 		}
 	}
 
+	public void deleteTicket(Tickets t){
+		try{
+
+			System.out.println("Inserting Rows into Table: " + ticketsTable);
+			 
+			// The sql query that will populate the database table BankRecords
+			String sql=	"DELETE FROM " + ticketsTable + " WHERE tid='" + t.gettID() + "'";
+			startConnection();
+			stmt.execute(sql);
+			System.out.println("Delete Ticket complete...");
+			
+		}catch (SQLException e){
+			System.out.println("fail to delete ticket: " + e);
+		}finally{
+			closeConnection();
+		}
+	}
+
 	public void addUsers(Users u){
 		try{
 
