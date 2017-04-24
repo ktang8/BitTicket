@@ -7,14 +7,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import jdk.nashorn.internal.codegen.CompilerConstants.Call;
 import models.TicketModel;
@@ -127,9 +130,24 @@ public class TicketController {
 		MainController.selectedTicket.setLastUpdated(dateFormat.format(date));
 		MainController.selectedTicket.setAssignee(assignee.getValue());
 		
-		TicketModel tm = new TicketModel();
-		tm.updateTicket(MainController.selectedTicket);
-		tm.showPopupMessage("Ticket Updated", (Stage) edit.getScene().getWindow());
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText("About to update ticket");
+		alert.setContentText("Are you sure you want to update ticket?");
+		
+		ButtonType YES = new ButtonType("Yes");
+		ButtonType NO = new ButtonType("No");
+		alert.getButtonTypes().setAll(YES, NO);
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get().getText().equals("Yes")){
+			TicketModel tm = new TicketModel();
+			tm.updateTicket(MainController.selectedTicket);
+		} else {
+			System.out.println("in else:" + result.get().toString());
+		    alert.close();
+		}
 	}
 	
 	@FXML
@@ -167,9 +185,26 @@ public class TicketController {
 	
 	@FXML
 	public void deleteTicket(){
-		TicketModel tm = new TicketModel();
-		tm.deleteTicket(MainController.selectedTicket);
-		backToMainView();
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText("About to delete ticket");
+		alert.setContentText("Are you sure you want to delete ticket?");
+		
+		ButtonType YES = new ButtonType("Yes");
+		ButtonType NO = new ButtonType("No");
+		alert.getButtonTypes().setAll(YES, NO);
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get().getText().equals("Yes")){
+			TicketModel tm = new TicketModel();
+			tm.deleteTicket(MainController.selectedTicket);
+			backToMainView();
+		} else {
+			System.out.println("in else:" + result.get().toString());
+		    alert.close();
+		}
+		
 	}
 
 }
