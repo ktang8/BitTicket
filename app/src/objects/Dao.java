@@ -9,8 +9,8 @@ import java.sql.Statement;
 
 public class Dao {
 	final String url = "jdbc:mysql://www.papademas.net/tickets?autoReconnect=true&useSSL=false&user=fp411&password=411";
-	static Connection c= null;
-	static Statement stmt = null;
+	public static Connection c= null;
+	public static Statement stmt = null;
 
 	public final String usersTable = "w_mei_users";
 	public final String ticketsTable = "w_mei_tickets";

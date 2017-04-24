@@ -36,7 +36,7 @@ public class LoginController {
 		LoginModel l= new LoginModel();
 		currentUser = l.getUserAccount(username);
 		
-		if (currentUser == null || !currentUser.getPassword().equals(password)){
+		if (currentUser == null || !l.verifyUser(username,password)){
 			System.out.println("Incorrect username or password");
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Warning Dialog");
