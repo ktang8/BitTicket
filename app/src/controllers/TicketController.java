@@ -26,8 +26,11 @@ import javafx.scene.control.TextArea;
 
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 
 public class TicketController {
+	@FXML
+	private Label currentFirstName;
 	@FXML
 	private Button logout;
 	@FXML
@@ -42,8 +45,6 @@ public class TicketController {
 	private TextField title;
 	@FXML
 	private TextArea description;
-	@FXML
-	private TextArea comments;
 	@FXML
 	private Button back;
 	@FXML
@@ -61,6 +62,8 @@ public class TicketController {
 	
 	@FXML
 	public void initialize() throws ParseException, SQLException {
+		currentFirstName.setText("Hi! " + LoginController.currentUser.getFirstName());
+		
 		ticketId.setText(MainController.selectedTicket.gettID());
 		submitter.setText(MainController.selectedTicket.getSubmitter());
 		

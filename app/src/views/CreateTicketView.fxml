@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="587.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateTicketController">
    <children>
-      <Button fx:id="logout" layoutX="551.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Button fx:id="logout" layoutX="551.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Logout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
       <Label layoutX="35.0" layoutY="99.0" prefHeight="16.0" prefWidth="78.0" text="Category:" />
       <Label layoutX="338.0" layoutY="99.0" prefHeight="16.0" prefWidth="54.0" text="Priority:" />
       <Text layoutX="35.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" />
@@ -51,5 +51,6 @@
             <Font size="37.0" />
          </font>
       </Text>
+      <Label fx:id="currentFirstName" layoutX="568.0" layoutY="16.0" text="firstname" />
    </children>
 </AnchorPane>

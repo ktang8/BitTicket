@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="587.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TicketController">
    <children>
-      <Button fx:id="logout" layoutX="551.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Button fx:id="logout" layoutX="551.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Logout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
       <Label layoutX="45.0" layoutY="75.0" prefHeight="16.0" prefWidth="63.0" text="Ticket ID:" />
       <Label layoutX="37.0" layoutY="99.0" prefHeight="16.0" prefWidth="73.0" text="Submit By:" />
       <Label layoutX="297.0" layoutY="75.0" prefHeight="16.0" prefWidth="92.0" text="Date Created:" />
@@ -25,7 +25,6 @@
       <TextField fx:id="title" disable="true" layoutX="82.0" layoutY="197.0" prefHeight="26.0" prefWidth="503.0" text="NAME OF TICKET" />
       <Text layoutX="36.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
       <TextArea fx:id="description" disable="true" layoutX="36.0" layoutY="241.0" prefHeight="108.0" prefWidth="551.0" text="Description" />
-      <Label layoutX="38.0" layoutY="355.0" text="Comments:" />
       <Button fx:id="back" layoutX="35.0" layoutY="547.0" mnemonicParsing="false" onAction="#backToMainView" text="Back" />
       <Button fx:id="edit" disable="true" layoutX="562.0" layoutY="547.0" mnemonicParsing="false" onAction="#clickUpdateButton" text="Save" />
       <Label layoutX="42.0" layoutY="133.0" prefHeight="17.0" prefWidth="54.0" text="Category:" />
@@ -76,7 +75,7 @@
       </Text>
       <Label layoutX="297.0" layoutY="99.0" prefHeight="16.0" prefWidth="92.0" text="Last Updated:" />
       <TextField fx:id="dateUpdated" disable="true" layoutX="391.0" layoutY="95.0" text="DATETIME" />
-      <TextArea fx:id="comments" layoutX="39.0" layoutY="373.0" prefHeight="156.0" prefWidth="551.0" />
       <Button fx:id="deleteTicket" disable="true" layoutX="291.0" layoutY="547.0" mnemonicParsing="false" onAction="#deleteTicket" text="Delete Ticket" />
+      <Label fx:id="currentFirstName" layoutX="558.0" layoutY="6.0" text="firstname" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>

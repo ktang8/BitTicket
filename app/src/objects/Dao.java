@@ -163,7 +163,7 @@ public class Dao {
 			System.out.println("Inserting Rows into Table: " + ticketsTable);
 			 
 			// The sql query that will populate the database table BankRecords
-			String sql=	"INSERT INTO " + ticketsTable +" (tid, dateCreated, lastUpdated, status, title, description, submitter, priority, category) " +
+			String sql=	"INSERT INTO " + ticketsTable +" (tid, dateCreated, lastUpdated, status, title, description, submitter, priority, category, assignee) " +
 					"VALUES ('" +
 					 t.gettID() + "', '" +
 					 t.getDateCreated() + "', '" + 
@@ -173,7 +173,8 @@ public class Dao {
 					 t.getDescription() + "', '" +
 					 t.getSubmitter() + "', " +
 					 t.getPriority() + ", '" + 
-					 t.getCategory()+ "')";
+					 t.getCategory()+ "', '" +
+					 t.getAssignee() + "')";
 			startConnection();
 			stmt.execute(sql);
 			System.out.println("Insertion complete...");
