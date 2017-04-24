@@ -88,7 +88,7 @@ public class TicketController {
 		edit.setDisable(false);
 		if(LoginController.currentUser.getPrivilege() > submittedUser.getPrivilege() || LoginController.currentUser.getUsername().equals(submittedUser.getUsername())){
 			//edit.setDisable(false);
-			description.setDisable(false);
+			description.setEditable(true);
 			title.setDisable(false);
 			status.setDisable(false);
 			category.setDisable(false);

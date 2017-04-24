@@ -24,7 +24,7 @@
       <Text layoutX="39.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" />
       <TextField fx:id="title" disable="true" layoutX="82.0" layoutY="197.0" prefHeight="26.0" prefWidth="503.0" text="NAME OF TICKET" />
       <Text layoutX="36.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
-      <TextArea fx:id="description" disable="true" layoutX="36.0" layoutY="241.0" prefHeight="108.0" prefWidth="551.0" text="Description" />
+      <TextArea fx:id="description" editable="false" layoutX="36.0" layoutY="241.0" prefHeight="288.0" prefWidth="551.0" text="Description" AnchorPane.bottomAnchor="60.0" />
       <Button fx:id="back" layoutX="35.0" layoutY="547.0" mnemonicParsing="false" onAction="#backToMainView" text="Back" />
       <Button fx:id="edit" disable="true" layoutX="562.0" layoutY="547.0" mnemonicParsing="false" onAction="#clickUpdateButton" text="Save" />
       <Label layoutX="42.0" layoutY="133.0" prefHeight="17.0" prefWidth="54.0" text="Category:" />
