@@ -77,6 +77,9 @@ public class TicketController {
 			edit.setDisable(false);
 			description.setDisable(false);
 			title.setDisable(false);
+			status.setDisable(false);
+			category.setDisable(false);
+			priority.setDisable(false);
 		}
 	}
 	

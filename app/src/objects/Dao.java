@@ -191,10 +191,10 @@ public class Dao {
 			System.out.println("Inserting Rows into Table: " + usersTable);
 			 
 			// The sql query that will populate the database table BankRecords
-			String sql=	"INSERT INTO " + usersTable +" (username, password, firstName, lastName, privilege) " +
+			String sql=	"INSERT INTO " + usersTable +" (username, pass, firstName, lastName, privilege) " +
 					"VALUES ('" +
 					 u.getUsername() + "', '" +
-					 u.getPassword().hashCode() + "', '" + 
+					 u.getPassword() + "', '" + 
 					 u.getFirstName() + "', '" + 
 					 u.getLastName() + "', " + 
 					 u.getPrivilege() + ")";
