@@ -101,6 +101,8 @@ public class MainController {
 		}catch(Exception e){
             e.printStackTrace();
             System.out.println("Error on Building Data");             
+        }finally{
+        	mm.closeConnection();
         }
 		
 	}

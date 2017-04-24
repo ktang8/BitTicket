@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +41,7 @@ public class TicketController {
 	@FXML
 	private TextArea description;
 	@FXML
-	private ListView comments;
+	private TextField comments;
 	@FXML
 	private Button back;
 	@FXML
@@ -53,6 +54,8 @@ public class TicketController {
 	private ComboBox<String> category;
 	@FXML
 	private ComboBox<String> status;
+	@FXML
+	private ComboBox<String> assignee;
 	
 	@FXML
 	public void initialize() throws ParseException, SQLException {
@@ -81,6 +84,10 @@ public class TicketController {
 			category.setDisable(false);
 			priority.setDisable(false);
 		}
+		if(LoginController.currentUser.getPrivilege()==3){
+			assignee.setDisable(false);
+			assignee.getItems().addAll(tm.getAllUsers());
+		}
 	}
 	
 	@FXML
@@ -107,6 +114,7 @@ public class TicketController {
 		MainController.selectedTicket.setPriority(priority.getValue());
 		MainController.selectedTicket.setStatus(status.getValue());
 		MainController.selectedTicket.setLastUpdated(dateFormat.format(date));
+		MainController.selectedTicket.setAssignee(assignee.getValue());
 		
 		TicketModel tm = new TicketModel();
 		tm.updateTicket(MainController.selectedTicket);
