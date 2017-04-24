@@ -27,10 +27,9 @@
       <TextArea fx:id="description" disable="true" layoutX="36.0" layoutY="241.0" prefHeight="108.0" prefWidth="551.0" text="Description" />
       <Label layoutX="38.0" layoutY="355.0" text="Comments:" />
       <Button fx:id="back" layoutX="35.0" layoutY="547.0" mnemonicParsing="false" onAction="#backToMainView" text="Back" />
-      <Button fx:id="edit" disable="true" layoutX="291.0" layoutY="547.0" mnemonicParsing="false" onAction="#clickUpdateButton" text="Save Updates" />
-      <Button fx:id="addcomment" layoutX="493.0" layoutY="547.0" mnemonicParsing="false" text="Add Comment" />
-      <Label layoutX="42.0" layoutY="133.0" prefHeight="17.0" prefWidth="54.0" text="Category:" />
-      <ComboBox fx:id="category" disable="true" layoutX="119.0" layoutY="129.0" prefHeight="25.0" prefWidth="149.0">
+      <Button fx:id="edit" disable="true" layoutX="562.0" layoutY="547.0" mnemonicParsing="false" onAction="#clickUpdateButton" text="Save" />
+      <Label layoutX="42.0" layoutY="133.0" prefHeight="17.0" prefWidth="78.0" text="Category:" />
+      <ComboBox fx:id="category" disable="true" layoutX="148.0" layoutY="129.0" prefHeight="25.0" prefWidth="149.0">
       		<items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Module1" />
@@ -42,7 +41,7 @@
  		        <String fx:value="Module1" />
   		    </value>
 	  </ComboBox>
-      <ComboBox fx:id="priority" disable="true" layoutX="391.0" layoutY="160.0" prefHeight="25.0" prefWidth="149.0">
+      <ComboBox fx:id="priority" disable="true" layoutX="413.0" layoutY="159.0" prefHeight="25.0" prefWidth="149.0">
       		<items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="1" />
@@ -54,23 +53,22 @@
 		        <String fx:value="1" />
 		    </value>
 	  </ComboBox>
-      <Label layoutX="334.0" layoutY="133.0" prefHeight="17.0" prefWidth="41.0" text="Status:" />
-      <ComboBox fx:id="status" disable="true" layoutX="390.0" layoutY="129.0" prefHeight="25.0" prefWidth="149.0" value="1">
+      <Label layoutX="334.0" layoutY="133.0" prefHeight="17.0" prefWidth="54.0" text="Status:" />
+      <ComboBox fx:id="status" disable="true" layoutX="413.0" layoutY="129.0" prefHeight="25.0" prefWidth="149.0" value="1">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Open" />
                <String fx:value="In Progress" />
                <String fx:value="On Hold" />
-               <String fx:value="Close" />
+               <String fx:value="Closed" />
             </FXCollections>
          </items>
             <value>
 		        <String fx:value="Open" />
 		    </value>
       </ComboBox>
-      <TextField fx:id="comments" layoutX="35.0" layoutY="372.0" prefHeight="108.0" prefWidth="330.0" />
-      <Label layoutX="42.0" layoutY="164.0" prefHeight="17.0" prefWidth="54.0" text="Assignee:" />
-      <ComboBox fx:id="assignee" disable="true" layoutX="119.0" layoutY="160.0" prefWidth="150.0" />
+      <Label layoutX="42.0" layoutY="164.0" prefHeight="17.0" prefWidth="73.0" text="Assignee:" />
+      <ComboBox fx:id="assignee" disable="true" layoutX="148.0" layoutY="159.0" prefWidth="150.0" promptText="Assignee" />
       <Text layoutX="212.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket View" wrappingWidth="234.04296875">
          <font>
             <Font size="37.0" />
@@ -78,5 +76,6 @@
       </Text>
       <Label layoutX="297.0" layoutY="99.0" prefHeight="16.0" prefWidth="92.0" text="Last Updated:" />
       <TextField fx:id="dateUpdated" disable="true" layoutX="391.0" layoutY="95.0" text="DATETIME" />
+      <TextArea fx:id="comments" layoutX="39.0" layoutY="373.0" prefHeight="156.0" prefWidth="551.0" />
    </children>
 </AnchorPane>

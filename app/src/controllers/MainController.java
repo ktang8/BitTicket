@@ -35,68 +35,30 @@ public class MainController {
 	@FXML
 	private Button logout;
 	@FXML
-	private TableView table;
+	private TableView assignedTable;
+	@FXML
+	private TableView activeTable;
+	@FXML
+	private TableView closedTable;
 	
 	@FXML
 	private Button submit;
 	
 	public void initialize() throws ParseException, SQLException {
-		ObservableList<ObservableList> data;
-		TableView tableview = new TableView();
-		data = FXCollections.observableArrayList();
+		//ObservableList<ObservableList> data;
+		//TableView tableview = new TableView();
+		//data = FXCollections.observableArrayList();
 		MainModel mm = new MainModel();
-		try{
-			ResultSet rs = mm.selectQuery("w_mei_tickets", "*");
+		try{	
+			mm.startConnection();
 			
-			/**********************************
-	         * TABLE COLUMN ADDED DYNAMICALLY *
-	         **********************************/
-	        for(int i=1 ; i<rs.getMetaData().getColumnCount(); i++){
-	            //We are using non property style for making dynamic table
-	            final int j = i;                
-	            TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-	            col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
-	                public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
-	                    return new SimpleStringProperty(param.getValue().get(j).toString());                        
-	                }                    
-	            });
-	           
-	            table.getColumns().addAll(col); 
-	            System.out.println("Column ["+i+"] ");
-	        }
-	
-	        /********************************
-	         * Data added to ObservableList *
-	         ********************************/
-	        while(rs.next()){
-	            //Iterate Row
-	            ObservableList<String> row = FXCollections.observableArrayList();
-	            for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
-	                //Iterate Column
-	                row.add(rs.getString(i));
-	            }
-	            System.out.println("Row [1] added "+row );
-	            data.add(row);
-	        }
-	
-	        //FINALLY ADD TO TableView
-	        table.setItems(data);
-	        
-	        table.setRowFactory(tv -> {
-	            TableRow<ObservableList<String>> row = new TableRow<>();
-	            row.setOnMouseClicked(event -> {
-	                if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
-	                     && event.getClickCount() == 2) {
-
-	                	ObservableList<String>  clickedRow = row.getItem();
-	                    System.out.println(clickedRow.get(1));
-	                	selectedTicket = mm.getTicket(clickedRow.get(1));
-	                	toTicketView();
-	                    
-	                }
-	            });
-	            return row ;
-	        });
+			ResultSet assignedRS = mm.assignedRs();
+			populateTable(assignedTable, assignedRS);
+			ResultSet activeRS = mm.activeRs();
+			populateTable(activeTable, activeRS);
+			ResultSet closedRS = mm.closedRs();
+			populateTable(closedTable, closedRS);
+			
 	        
 		}catch(Exception e){
             e.printStackTrace();
@@ -140,9 +102,57 @@ public class MainController {
 			System.out.println("failed to go to CreateTicketView: " + e);
 		}
 	}
+	public void populateTable(TableView table, ResultSet rs){
+		ObservableList<ObservableList> data = FXCollections.observableArrayList();
+		MainModel mm = new MainModel();
+		try{
+			for(int i=1 ; i<rs.getMetaData().getColumnCount(); i++){
+	            //We are using non property style for making dynamic table
+	            final int j = i;                
+	            TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+	            col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+	                public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+	                    return new SimpleStringProperty(param.getValue().get(j).toString());                        
+	                }                    
+	            });
+	            table.getColumns().addAll(col);
+			}
+		
+			while(rs.next()){
+		            //Iterate Row
+		            ObservableList<String> row = FXCollections.observableArrayList();
+		            for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+		                //Iterate Column
+		                row.add(rs.getString(i));
+		            }
+		            System.out.println("Row [1] added "+row );
+		            data.add(row);
+		        }
+		        //FINALLY ADD TO TableView
+		        table.setItems(data);
+		        
+		        table.setRowFactory(tv -> {
+		            TableRow<ObservableList<String>> row = new TableRow<>();
+		            row.setOnMouseClicked(event -> {
+		                if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+		                     && event.getClickCount() == 2) {
 	
+		                	ObservableList<String>  clickedRow = row.getItem();
+		                    System.out.println(clickedRow.get(1));
+		                	selectedTicket = mm.getTicket(clickedRow.get(1));
+		                	toTicketView();
+		                    
+		                }
+		            });
+		            return row ;
+		        });
+		}catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Error on Building Data"+ rs.toString());             
+        }
+	}
 	public void toTicketView(){
-		Stage stage = (Stage) table.getScene().getWindow();
+		Stage stage = (Stage) logout.getScene().getWindow();
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("/views/TicketView.fxml"));
