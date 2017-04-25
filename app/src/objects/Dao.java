@@ -257,7 +257,7 @@ public class Dao {
 	 * @return
 	 */
 	public ResultSet selectQuery(String table, String columnNames){
-		String sql = "SELECT " + columnNames + " FROM " + table + " ORDER BY pid DESC";
+		String sql = "SELECT " + columnNames + " FROM " + table + " where privilege>1 ORDER BY pid DESC";
 		ResultSet rs = null;
 		try{
 			startConnection();

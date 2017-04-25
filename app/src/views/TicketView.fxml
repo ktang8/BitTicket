@@ -31,13 +31,13 @@
       <ComboBox fx:id="category" disable="true" layoutX="119.0" layoutY="129.0" prefHeight="25.0" prefWidth="149.0">
       		<items>
                   <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Module1" />
-                     <String fx:value="Module2" />
-                     <String fx:value="Module3" />
+                     <String fx:value="infrastructure" />
+                     <String fx:value="Development" />
+                     <String fx:value="Accounting" />
                   </FXCollections>
               </items>
               <value>
- 		        <String fx:value="Module1" />
+ 		        <String fx:value="Development" />
   		    </value>
 	  </ComboBox>
       <ComboBox fx:id="priority" disable="true" layoutX="391.0" layoutY="160.0" prefHeight="25.0" prefWidth="149.0">
@@ -67,7 +67,7 @@
 		    </value>
       </ComboBox>
       <Label layoutX="42.0" layoutY="164.0" prefHeight="17.0" prefWidth="54.0" text="Assignee:" />
-      <ComboBox fx:id="assignee" disable="true" layoutX="119.0" layoutY="160.0" prefWidth="150.0" promptText="Assignee" />
+      <ComboBox fx:id="assignee" disable="true" layoutX="119.0" layoutY="160.0" prefWidth="150.0"/>
       <Text layoutX="212.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket View" wrappingWidth="234.04296875">
          <font>
             <Font size="37.0" />

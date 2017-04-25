@@ -25,13 +25,13 @@
       <ComboBox fx:id="category" layoutX="123.0" layoutY="95.0" prefHeight="25.0" prefWidth="171.0">
       		<items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Module1" />
-                    <String fx:value="Module2" />
-                    <String fx:value="Module3" />
+                    <String fx:value="Infastructures" />
+                    <String fx:value="Developement" />
+                    <String fx:value="Accounting" />
                 </FXCollections>
             </items>
             <value>
-		        <String fx:value="Module1" />
+		        <String fx:value="Development" />
 		    </value>
       </ComboBox>
       <ComboBox fx:id="priority" layoutX="392.0" layoutY="95.0" prefHeight="25.0" prefWidth="171.0">

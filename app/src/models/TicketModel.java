@@ -26,7 +26,7 @@ public class TicketModel extends Dao {
 		return getUser(username);
 	}
 	
-	public List<String> getAllUsers(){
+	public List<String> getAllDevs(){
 		ResultSet rs = selectQuery(usersTable, "username");
 		List<String> usernames = new ArrayList<String>();
 		try {

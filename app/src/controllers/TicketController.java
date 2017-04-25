@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -89,7 +90,7 @@ public class TicketController {
 		TicketModel tm = new TicketModel();
 		Users submittedUser =tm.getSubmitterUser(submitter.getText());
 		edit.setDisable(false);
-		if(LoginController.currentUser.getPrivilege() > submittedUser.getPrivilege() || LoginController.currentUser.getUsername().equals(submittedUser.getUsername())){
+		if((LoginController.currentUser.getPrivilege() > submittedUser.getPrivilege() || LoginController.currentUser.getUsername().equals(submittedUser.getUsername())&&LoginController.currentUser.getPrivilege()>1)){
 			//edit.setDisable(false);
 			description.setEditable(true);
 			title.setDisable(false);
@@ -97,9 +98,9 @@ public class TicketController {
 			category.setDisable(false);
 			priority.setDisable(false);
 		}
-		if(LoginController.currentUser.getPrivilege()==3){
+		if(LoginController.currentUser.getPrivilege()>=3){
 			assignee.setDisable(false);
-			assignee.getItems().addAll(tm.getAllUsers());
+			assignee.getItems().addAll(tm.getAllDevs());
 			deleteTicket.setDisable(false);
 		}
 	}
@@ -131,6 +132,7 @@ public class TicketController {
 		MainController.selectedTicket.setAssignee(assignee.getValue());
 		
 		
+		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
 		alert.setHeaderText("About to update ticket");
@@ -144,6 +146,13 @@ public class TicketController {
 		if (result.get().getText().equals("Yes")){
 			TicketModel tm = new TicketModel();
 			tm.updateTicket(MainController.selectedTicket);
+			if(status.getValue().equals("Closed")){
+				alert.setHeaderText("");
+				alert.setContentText("Ticket: " + MainController.selectedTicket.gettID() + " has been closed.");
+				ButtonType OK = new ButtonType("Ok");
+				alert.getButtonTypes().setAll(OK);
+				alert.showAndWait();
+			}
 		} else {
 			System.out.println("in else:" + result.get().toString());
 		    alert.close();
@@ -185,10 +194,9 @@ public class TicketController {
 	
 	@FXML
 	public void deleteTicket(){
-
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
-		alert.setHeaderText("About to delete ticket");
+		alert.setHeaderText("About to delete ticket: " + MainController.selectedTicket.gettID());
 		alert.setContentText("Are you sure you want to delete ticket?");
 		
 		ButtonType YES = new ButtonType("Yes");
@@ -200,6 +208,11 @@ public class TicketController {
 			TicketModel tm = new TicketModel();
 			tm.deleteTicket(MainController.selectedTicket);
 			backToMainView();
+			alert.setHeaderText("");
+			alert.setContentText("Ticket: " + MainController.selectedTicket.gettID() + " has been deleted.");
+			ButtonType OK = new ButtonType("Ok");
+			alert.getButtonTypes().setAll(OK);
+			alert.showAndWait();
 		} else {
 			System.out.println("in else:" + result.get().toString());
 		    alert.close();
