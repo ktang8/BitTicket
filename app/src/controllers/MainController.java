@@ -31,7 +31,7 @@ import models.MainModel;
 import objects.Tickets;
 import objects.Users;
 
-public class MainController {
+public class MainController extends ControllerHelper {
 	public static Tickets selectedTicket = new Tickets("20170420141305", "2017-04-20 14:13:05",
 			 "2017-04-20 14:13:05", "open", "testTitle", "testDescription",
 			 "ktang", 3, "Open");
@@ -113,33 +113,16 @@ public class MainController {
 	@FXML
 	public void logout(ActionEvent event) {
 		Stage stage = (Stage) logout.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to logout: " + e);
-		}finally{
-			LoginController.currentUser = null;
-		}
+		String view = "/views/LoginView.fxml";
+		changeScene(stage,view);
+		LoginController.currentUser = null;
 	}
 	
 	@FXML
 	public void submit() {
 		Stage stage = (Stage) submit.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/CreateTicketView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to go to CreateTicketView: " + e);
-		}
+		String view = "/views/CreateTicketView.fxml";
+		changeScene(stage,view);
 	}
 	public void populateTable(TableView table, ResultSet rs){
 		ObservableList<ObservableList> data = FXCollections.observableArrayList();
@@ -194,29 +177,13 @@ public class MainController {
 	}
 	public void toUserList(){
 		Stage stage = (Stage) toUsers.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/UserListView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to go to UserListView: " + e);
-		}
+		String view = "/views/UserListView.fxml";
+		changeScene(stage,view);
 		
 	}
 	public void toTicketView(){
 		Stage stage = (Stage) logout.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/TicketView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to go to TicketView: " + e);
-		}
+		String view = "/views/TicketView.fxml";
+		changeScene(stage,view);
 	}
 }

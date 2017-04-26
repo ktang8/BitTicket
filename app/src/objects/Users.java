@@ -5,17 +5,19 @@ public class Users {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private int privilege ;
+	private int privilege;
+	private String email;
 
 	public Users() {
 	}
 
-	public Users(String username, String password, String firstName, String lastName, int privilege) {
+	public Users(String username, String password, String firstName, String lastName, int privilege, String email) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.privilege = privilege;
+		this.email = email;
 	}
 
 	public int getuID() {
@@ -65,10 +67,17 @@ public class Users {
 	public void setPrivilege(int privilege) {
 		this.privilege = privilege;
 	}
+	
+	public String getEmail(){
+		return email;
+	}
+	public void setEmail(){
+		this.email=email;
+	}
 
 	@Override
 	public String toString() {
 		return "Users [uID=" + uID + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", privilege=" + privilege + "]";
+				+ ", lastName=" + lastName + ", privilege=" + privilege + ",email= "+email+"]";
 	}
 }

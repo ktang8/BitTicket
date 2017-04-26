@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import models.CreateTicketModel;
 import objects.Tickets;
 
-public class CreateTicketController{
+public class CreateTicketController extends ControllerHelper{
 	@FXML
 	private Label currentFirstName;
 	@FXML
@@ -78,49 +78,23 @@ public class CreateTicketController{
 	@FXML
 	public void backToMainView() {
 		Stage stage = (Stage) back.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to go back to MainView: " + e);
-			
-		}
+		String view = "/views/MainView.fxml";
+		changeScene(stage,view);
 	}
 	
 	@FXML
 	public void logout() {
 		Stage stage = (Stage) logout.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to logout: " + e);
-		}finally{
-			LoginController.currentUser = null;
-		}
+		String view = "/views/LoginView.fxml";
+		changeScene(stage,view);
+		LoginController.currentUser = null;
+		
 	}
 	
 	public void toTicketView(){
 		Stage stage = (Stage) submit.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/TicketView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to go to TicketView: " + e);
-			
-		}	
+		String view = "/views/TicketView.fxml";
+		changeScene(stage,view);
 		
 	}
 }
