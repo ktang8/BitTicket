@@ -103,6 +103,7 @@ public class TicketController {
 			if(currentUser.getPrivilege()<=1){
 				assignee.setVisible(false);
 				assigneeLabel.setVisible(false);
+				deleteTicket.setVisible(false);
 			}
 		}
 		if(LoginController.currentUser.getPrivilege()>=3){

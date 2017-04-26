@@ -50,7 +50,6 @@ public class MainController {
 	private Button toUsers;
 	@FXML
 	private TabPane tabpane;
-	
 	@FXML 
 	private Tab tab1;
 	@FXML 
@@ -72,7 +71,7 @@ public class MainController {
 			Users lc = LoginController.currentUser;
 			String conditional;
 			if(lc.getPrivilege()>=3){
-				
+				toUsers.setDisable(false);
 				conditional = "assignee ='"+lc.getUsername()+"'";
 				ResultSet assignedRS = mm.userRs(conditional);
 				populateTable(table1, assignedRS);
@@ -167,7 +166,7 @@ public class MainController {
 		                //Iterate Column
 		                row.add(rs.getString(i));
 		            }
-		            System.out.println("Row [1] added "+row );
+		            //System.out.println("Row [1] added "+row );
 		            data.add(row);
 		        }
 		        //FINALLY ADD TO TableView
@@ -192,6 +191,20 @@ public class MainController {
             e.printStackTrace();
             System.out.println("Error on Building Data"+ rs.toString());             
         }
+	}
+	public void toUserList(){
+		Stage stage = (Stage) toUsers.getScene().getWindow();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/views/UserListView.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("failed to go to UserListView: " + e);
+		}
+		
 	}
 	public void toTicketView(){
 		Stage stage = (Stage) logout.getScene().getWindow();
