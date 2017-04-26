@@ -31,7 +31,7 @@ import models.MainModel;
 import objects.Tickets;
 import objects.Users;
 
-public class MainController {
+public class MainController extends ControllerHelper {
 	public static Tickets selectedTicket = new Tickets("20170420141305", "2017-04-20 14:13:05",
 			 "2017-04-20 14:13:05", "open", "testTitle", "testDescription",
 			 "ktang", 3, "Open");
@@ -50,7 +50,6 @@ public class MainController {
 	private Button toUsers;
 	@FXML
 	private TabPane tabpane;
-	
 	@FXML 
 	private Tab tab1;
 	@FXML 
@@ -72,7 +71,7 @@ public class MainController {
 			Users lc = LoginController.currentUser;
 			String conditional;
 			if(lc.getPrivilege()>=3){
-				
+				toUsers.setDisable(false);
 				conditional = "assignee ='"+lc.getUsername()+"'";
 				ResultSet assignedRS = mm.userRs(conditional);
 				populateTable(table1, assignedRS);
@@ -114,33 +113,16 @@ public class MainController {
 	@FXML
 	public void logout(ActionEvent event) {
 		Stage stage = (Stage) logout.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to logout: " + e);
-		}finally{
-			LoginController.currentUser = null;
-		}
+		String view = "/views/LoginView.fxml";
+		changeScene(stage,view);
+		LoginController.currentUser = null;
 	}
 	
 	@FXML
 	public void submit() {
 		Stage stage = (Stage) submit.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/CreateTicketView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to go to CreateTicketView: " + e);
-		}
+		String view = "/views/CreateTicketView.fxml";
+		changeScene(stage,view);
 	}
 	public void populateTable(TableView table, ResultSet rs){
 		ObservableList<ObservableList> data = FXCollections.observableArrayList();
@@ -167,7 +149,7 @@ public class MainController {
 		                //Iterate Column
 		                row.add(rs.getString(i));
 		            }
-		            System.out.println("Row [1] added "+row );
+		            //System.out.println("Row [1] added "+row );
 		            data.add(row);
 		        }
 		        //FINALLY ADD TO TableView
@@ -193,17 +175,15 @@ public class MainController {
             System.out.println("Error on Building Data"+ rs.toString());             
         }
 	}
+	public void toUserList(){
+		Stage stage = (Stage) toUsers.getScene().getWindow();
+		String view = "/views/UserListView.fxml";
+		changeScene(stage,view);
+		
+	}
 	public void toTicketView(){
 		Stage stage = (Stage) logout.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/TicketView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to go to TicketView: " + e);
-		}
+		String view = "/views/TicketView.fxml";
+		changeScene(stage,view);
 	}
 }

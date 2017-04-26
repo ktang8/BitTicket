@@ -15,7 +15,7 @@ import objects.Users;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-public class LoginController {
+public class LoginController extends ControllerHelper{
 	public static Users currentUser;
 	
 	@FXML
@@ -46,15 +46,8 @@ public class LoginController {
 			return;
 		}else{
 			Stage stage = (Stage) login.getScene().getWindow();
-			Parent root;
-			try {
-				root = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
-				Scene scene = new Scene(root);
-				stage.setScene(scene);
-				stage.show();
-			} catch (IOException e) {
-				System.out.println("failed to go back to MainView: " + e);
-			}
+			String view = "/views/MainView.fxml";
+			changeScene(stage,view);
 		}
 	}
 }
