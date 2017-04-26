@@ -177,10 +177,7 @@ public class TicketController extends ControllerHelper{
 	
 	@FXML
 	public void logout() {
-		Stage stage = (Stage) logout.getScene().getWindow();
-		String view = "/views/LoginView.fxml";
-		changeScene(stage,view);
-		LoginController.currentUser = null;
+		super.logout(logout);
 	}
 	
 	@FXML

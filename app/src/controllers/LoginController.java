@@ -24,6 +24,8 @@ public class LoginController extends ControllerHelper{
 	private PasswordField password;
 	@FXML
 	private Button login;
+	@FXML
+	private Button createUserButton;
 	
 	@FXML
 	public void onEnter() throws IOException, NoSuchAlgorithmException{
@@ -49,5 +51,12 @@ public class LoginController extends ControllerHelper{
 			String view = "/views/MainView.fxml";
 			changeScene(stage,view);
 		}
+	}
+	
+	@FXML
+	public void createUser() {
+		Stage stage = (Stage) createUserButton.getScene().getWindow();
+		String view = "/views/UserView.fxml";
+		changeScene(stage,view);
 	}
 }
