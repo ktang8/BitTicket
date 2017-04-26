@@ -10,15 +10,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="244.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserController">
+<AnchorPane prefHeight="255.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserController">
    <children>
       <Button fx:id="logout" layoutX="551.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Logout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
-      <Label layoutX="338.0" layoutY="99.0" prefHeight="16.0" prefWidth="78.0" text="Privileges:" />
-      <Text layoutX="43.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
-      <TextField fx:id="username" layoutX="122.0" layoutY="95.0" prefHeight="26.0" prefWidth="145.0" AnchorPane.rightAnchor="373.0" />
+      <Label fx:id="privLabel" layoutX="282.0" layoutY="152.0" prefHeight="16.0" prefWidth="78.0" text="Privileges:" />
+      <Text layoutX="43.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
+      <TextField fx:id="username" layoutX="122.0" layoutY="148.0" prefHeight="26.0" prefWidth="145.0" AnchorPane.rightAnchor="373.0" />
       <Button fx:id="back" layoutX="43.0" layoutY="547.0" mnemonicParsing="false" onAction="#backToUserView" text="Back" AnchorPane.bottomAnchor="14.0" />
       <Button fx:id="submit" layoutX="558.0" layoutY="547.0" mnemonicParsing="false" onAction="#createUser" text="Submit" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0" />
-      <ComboBox fx:id="privilege" layoutX="392.0" layoutY="95.0" prefHeight="26.0" prefWidth="138.0" AnchorPane.rightAnchor="77.0">
+      <ComboBox fx:id="privilege" layoutX="360.0" layoutY="148.0" prefHeight="26.0" prefWidth="138.0" AnchorPane.rightAnchor="142.0">
       		<items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="1" />
@@ -39,9 +39,11 @@
       <Label fx:id="currentFirstName" layoutX="568.0" layoutY="16.0" text="firstname" />
       <Text layoutX="40.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
       <TextField fx:id="firstName" layoutX="122.0" layoutY="122.0" prefHeight="26.0" prefWidth="145.0" />
-      <Text layoutX="40.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
-      <TextField fx:id="lastName" layoutX="122.0" layoutY="149.0" prefHeight="26.0" prefWidth="145.0" />
-      <Text layoutX="292.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
-      <TextField fx:id="email" layoutX="345.0" layoutY="148.0" prefHeight="26.0" prefWidth="222.0" />
+      <Text layoutX="40.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
+      <TextField fx:id="lastName" layoutX="122.0" layoutY="94.0" prefHeight="26.0" prefWidth="145.0" />
+      <Text layoutX="307.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
+      <TextField fx:id="email" layoutX="359.0" layoutY="93.0" prefHeight="26.0" prefWidth="198.0" />
+      <Text fx:id="passLabel" layoutX="282.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
+      <TextField fx:id="password" layoutX="359.0" layoutY="122.0" prefHeight="26.0" prefWidth="198.0" />
    </children>
 </AnchorPane>
