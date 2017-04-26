@@ -163,7 +163,7 @@ public class Dao {
 			System.out.println("Inserting Rows into Table: " + ticketsTable);
 			 
 			// The sql query that will populate the database table BankRecords
-			String sql=	"INSERT INTO " + ticketsTable +" (tid, dateCreated, lastUpdated, status, title, description, submitter, priority, category) " +
+			String sql=	"INSERT INTO " + ticketsTable +" (tid, dateCreated, lastUpdated, status, title, description, submitter, priority, category, assignee) " +
 					"VALUES ('" +
 					 t.gettID() + "', '" +
 					 t.getDateCreated() + "', '" + 
@@ -173,13 +173,32 @@ public class Dao {
 					 t.getDescription() + "', '" +
 					 t.getSubmitter() + "', " +
 					 t.getPriority() + ", '" + 
-					 t.getCategory()+ "')";
+					 t.getCategory()+ "', '" +
+					 t.getAssignee() + "')";
 			startConnection();
 			stmt.execute(sql);
 			System.out.println("Insertion complete...");
 			
 		}catch (SQLException e){
 			System.out.println("fail to insert: " + e);
+		}finally{
+			closeConnection();
+		}
+	}
+
+	public void deleteTicket(Tickets t){
+		try{
+
+			System.out.println("Inserting Rows into Table: " + ticketsTable);
+			 
+			// The sql query that will populate the database table BankRecords
+			String sql=	"DELETE FROM " + ticketsTable + " WHERE tid='" + t.gettID() + "'";
+			startConnection();
+			stmt.execute(sql);
+			System.out.println("Delete Ticket complete...");
+			
+		}catch (SQLException e){
+			System.out.println("fail to delete ticket: " + e);
 		}finally{
 			closeConnection();
 		}
@@ -238,7 +257,7 @@ public class Dao {
 	 * @return
 	 */
 	public ResultSet selectQuery(String table, String columnNames){
-		String sql = "SELECT " + columnNames + " FROM " + table + " ORDER BY pid DESC";
+		String sql = "SELECT " + columnNames + " FROM " + table + " where privilege>1 ORDER BY pid DESC";
 		ResultSet rs = null;
 		try{
 			startConnection();

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 
 import java.io.IOException;
@@ -35,6 +36,8 @@ public class MainController {
 	@FXML
 	private Button logout;
 	@FXML
+	private Label currentFirstName;
+	@FXML
 	private TableView assignedTable;
 	@FXML
 	private TableView activeTable;
@@ -48,6 +51,7 @@ public class MainController {
 		//ObservableList<ObservableList> data;
 		//TableView tableview = new TableView();
 		//data = FXCollections.observableArrayList();
+		currentFirstName.setText("Hi! " + LoginController.currentUser.getFirstName());
 		MainModel mm = new MainModel();
 		try{	
 			mm.startConnection();

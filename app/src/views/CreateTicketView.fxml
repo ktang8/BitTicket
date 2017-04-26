@@ -8,11 +8,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="587.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateTicketController">
    <children>
-      <Button fx:id="logout" layoutX="551.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Button fx:id="logout" layoutX="551.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Logout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
       <Label layoutX="35.0" layoutY="99.0" prefHeight="16.0" prefWidth="78.0" text="Category:" />
       <Label layoutX="338.0" layoutY="99.0" prefHeight="16.0" prefWidth="54.0" text="Priority:" />
       <Text layoutX="35.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" />
@@ -24,13 +25,13 @@
       <ComboBox fx:id="category" layoutX="123.0" layoutY="95.0" prefHeight="25.0" prefWidth="171.0">
       		<items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Module1" />
-                    <String fx:value="Module2" />
-                    <String fx:value="Module3" />
+                    <String fx:value="Infastructures" />
+                    <String fx:value="Developement" />
+                    <String fx:value="Accounting" />
                 </FXCollections>
             </items>
             <value>
-		        <String fx:value="Module1" />
+		        <String fx:value="Development" />
 		    </value>
       </ComboBox>
       <ComboBox fx:id="priority" layoutX="392.0" layoutY="95.0" prefHeight="25.0" prefWidth="171.0">
@@ -45,5 +46,11 @@
 		        <String fx:value="1" />
 		    </value>
       </ComboBox>
+      <Text layoutX="193.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Ticket" wrappingWidth="234.04296875">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Text>
+      <Label fx:id="currentFirstName" layoutX="568.0" layoutY="16.0" text="firstname" />
    </children>
 </AnchorPane>

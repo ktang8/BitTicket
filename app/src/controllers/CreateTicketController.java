@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ import models.CreateTicketModel;
 import objects.Tickets;
 
 public class CreateTicketController{
+	@FXML
+	private Label currentFirstName;
 	@FXML
 	private Button logout;
 	@FXML
@@ -33,6 +36,11 @@ public class CreateTicketController{
 	@FXML
 	private ComboBox<String> category;
 
+	@FXML
+	public void initialize() {
+		currentFirstName.setText("Hi! " + LoginController.currentUser.getFirstName());
+	}
+	
 	@FXML
 	public void createTicket() throws IOException{
 		if(this.title.getText().length()>150){
@@ -58,8 +66,8 @@ public class CreateTicketController{
 		DateFormat ticketID = new SimpleDateFormat("yyyyMMddHHmmss");
 		
 		Tickets newTicket = new Tickets(ticketID.format(date), dateFormat.format(date), dateFormat.format(date), "Open", newTitle,
-				newDescription, "ktang", newPriority, newCategory);
-		
+				newDescription, LoginController.currentUser.getUsername(), newPriority, newCategory);
+		newTicket.setAssignee("");
 		CreateTicketModel ctm = new CreateTicketModel();
 		ctm.createTicket(newTicket);
 		
