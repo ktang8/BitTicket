@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 
 import java.io.IOException;
@@ -27,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import models.MainModel;
 import objects.Tickets;
+import objects.Users;
 
 public class MainController {
 	public static Tickets selectedTicket = new Tickets("20170420141305", "2017-04-20 14:13:05",
@@ -38,11 +41,22 @@ public class MainController {
 	@FXML
 	private Label currentFirstName;
 	@FXML
-	private TableView assignedTable;
+	private TableView table1;
 	@FXML
-	private TableView activeTable;
+	private TableView table2;
 	@FXML
-	private TableView closedTable;
+	private TableView table3;
+	@FXML
+	private Button toUsers;
+	@FXML
+	private TabPane tabpane;
+	
+	@FXML 
+	private Tab tab1;
+	@FXML 
+	private Tab tab2;
+	@FXML 
+	private Tab tab3;
 	
 	@FXML
 	private Button submit;
@@ -55,14 +69,36 @@ public class MainController {
 		MainModel mm = new MainModel();
 		try{	
 			mm.startConnection();
-			
-			ResultSet assignedRS = mm.assignedRs();
-			populateTable(assignedTable, assignedRS);
-			ResultSet activeRS = mm.activeRs();
-			populateTable(activeTable, activeRS);
-			ResultSet closedRS = mm.closedRs();
-			populateTable(closedTable, closedRS);
-			
+			Users lc = LoginController.currentUser;
+			String conditional;
+			if(lc.getPrivilege()>=3){
+				
+				conditional = "assignee ='"+lc.getUsername()+"'";
+				ResultSet assignedRS = mm.userRs(conditional);
+				populateTable(table1, assignedRS);
+				
+				conditional = "NOT status='Closed'";
+				ResultSet activeRS = mm.userRs(conditional);
+				populateTable(table2, activeRS);
+				
+				conditional = "status='Closed'";
+				ResultSet closedRS = mm.userRs(conditional);
+				populateTable(table3, closedRS);
+			}else{
+				toUsers.setVisible(false);
+				conditional = "submitter = '"+lc.getUsername()+"' AND NOT status ='Closed'";
+				ResultSet userRS = mm.userRs(conditional);
+				populateTable(table1, userRS);
+				
+				conditional ="submitter = '"+lc.getUsername()+"' AND status='Closed'";
+				ResultSet closedRs = mm.userRs(conditional);
+				populateTable(table2,closedRs);
+				tab1.setText("My Tickets");
+				tab2.setText("Closed Tickets");
+				
+				tabpane.getTabs().remove(tab3);
+				//tabpane.getTabs().remove(3);			
+			}
 	        
 		}catch(Exception e){
             e.printStackTrace();
