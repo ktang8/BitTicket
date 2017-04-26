@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import models.LoginModel;
 import objects.Users;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginController extends ControllerHelper{
 	public static Users currentUser;
@@ -25,11 +26,11 @@ public class LoginController extends ControllerHelper{
 	private Button login;
 	
 	@FXML
-	public void onEnter() throws IOException{
+	public void onEnter() throws IOException, NoSuchAlgorithmException{
 		login();
 	}
 	@FXML
-	public void login() throws IOException {
+	public void login() throws IOException, NoSuchAlgorithmException {
 		String username = this.username.getText();
 		String password = this.password.getText();
 		
