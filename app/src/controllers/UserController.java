@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import objects.Users;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
@@ -31,6 +33,35 @@ public class UserController extends ControllerHelper{
 	private TextField lastName;
 	@FXML
 	private TextField email;
+	@FXML
+	private TextField password;
+	@FXML
+	private Label privLabel;
+	@FXML
+	private Text passLabel;
+	
+	public void initialize(){
+		Users currentUser = LoginController.currentUser;
+		Users selectedUser = UserListController.selectedUser;
+		if(currentUser ==null){
+			//new user
+			privLabel.setVisible(false);
+			privilege.setVisible(false);
+			submit.setText("Create");
+			
+		}else{
+			submit.setText("Update");
+			passLabel.setVisible(false);
+			password.setVisible(false);
+			username.setText(selectedUser.getUsername());
+			firstName.setText(selectedUser.getFirstName());
+			lastName.setText(selectedUser.getLastName());
+			privilege.setValue(selectedUser.getPrivilege());
+			email.setText(selectedUser.getEmail());
+			
+		}
+		
+	}
 
 	// Event Listener on Button[#logout].onAction
 	@FXML
