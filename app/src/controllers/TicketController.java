@@ -63,7 +63,8 @@ public class TicketController {
 	private ComboBox<String> status;
 	@FXML
 	private ComboBox<String> assignee;
-	
+	@FXML
+	private Label assigneeLabel;
 	@FXML
 	public void initialize() throws ParseException, SQLException {
 		currentFirstName.setText("Hi! " + LoginController.currentUser.getFirstName());
@@ -89,20 +90,27 @@ public class TicketController {
 		
 		TicketModel tm = new TicketModel();
 		Users submittedUser =tm.getSubmitterUser(submitter.getText());
+		Users currentUser = LoginController.currentUser;
 		edit.setDisable(false);
-		if((LoginController.currentUser.getPrivilege() > submittedUser.getPrivilege() || LoginController.currentUser.getUsername().equals(submittedUser.getUsername())&&LoginController.currentUser.getPrivilege()>1)){
+		if((currentUser.getPrivilege() > submittedUser.getPrivilege() || currentUser.getUsername().equals(submittedUser.getUsername())&&currentUser.getPrivilege()>1)){
 			//edit.setDisable(false);
 			description.setEditable(true);
 			title.setDisable(false);
 			status.setDisable(false);
 			category.setDisable(false);
 			priority.setDisable(false);
+		}else{
+			if(currentUser.getPrivilege()<=1){
+				assignee.setVisible(false);
+				assigneeLabel.setVisible(false);
+			}
 		}
 		if(LoginController.currentUser.getPrivilege()>=3){
 			assignee.setDisable(false);
 			assignee.getItems().addAll(tm.getAllDevs());
 			deleteTicket.setDisable(false);
 		}
+		
 	}
 	
 	@FXML
