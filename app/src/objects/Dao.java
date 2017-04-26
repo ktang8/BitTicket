@@ -287,7 +287,7 @@ public class Dao {
 			//rs will be closed later after it is printed out.
 			System.out.println("Query completed...");
 			if (rs.next()){
-				u = new Users(rs.getString("username"), rs.getString("pass"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("privilege"));
+				u = new Users(rs.getString("username"), rs.getString("pass"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("privilege"), rs.getString("email"));
 			}
 		} catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -360,9 +360,5 @@ public class Dao {
 		closeConnection();
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new Dao();
-	}
 
 }
