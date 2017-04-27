@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import controllers.MainController;
@@ -16,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import objects.Dao;
+import objects.Tickets;
 
 
 public class Main extends Application {
@@ -38,29 +41,36 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Console Controller");
-		System.out.println("Select an Option");
-		System.out.println("D| Display Duration of All Tickets.");
-		System.out.println("R| Display Ratio of Closed Ticket to Open Ticket.");
-		System.out.println("H| Display Tickets that are currently Open with High Priority.");
-		System.out.println("Q| Quit/End program");
-		String userInput =scan.next();
-		switch(userInput){
-			case "d":
-			case "D":
-				displayTicketDurations();
-				break;
-			case "r":
-			case "R":
-			case "h":
-			case "H":
-			case "q":
-			case "Q":
-				return;
-			default:
-				System.out.println("Option: " + userInput + " not recognized.");
-				break;
-			
+		while(true){
+			System.out.println("\nConsole Controller");
+			System.out.println("Select an Option");
+			System.out.println("D| Display Duration of All Tickets.");
+			System.out.println("R| Display Ratio of Closed Ticket to Open Ticket.");
+			System.out.println("H| Display Tickets that are currently Open with High Priority.");
+			System.out.println("Q| Quit/End program");
+			System.out.println("--------------------------------------------------------------");
+			String userInput =scan.next();
+			switch(userInput){
+				case "d":
+				case "D":
+					displayTicketDurations();
+					break;
+				case "r":
+				case "R":
+					displayClosedToOpenRatio();
+					break;
+				case "h":
+				case "H":
+					displayOpenHighPriorityTickets();
+					break;
+				case "q":
+				case "Q":
+					return;
+				default:
+					System.out.println("Option: " + userInput + " not recognized.");
+					break;
+				
+			}
 		}
 	}
 	
@@ -90,8 +100,46 @@ public class Main extends Application {
 		} catch (SQLException e) {
 			System.out.println("Problem reading in ticket: " + e);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Problem parsing date: " + e);
+		}
+	}
+	
+	public static void displayClosedToOpenRatio(){
+		Dao d = new Dao();
+		ResultSet rs = d.getAllTickets(d.ticketsTable, "tid, status");
+		int close=0;
+		int open=0;
+		String status;
+		try{
+			while(rs.next()){
+				status = rs.getString("status");
+				if(status.equals("Closed")){
+					close++;
+				}else{
+					open++;
+				}
+			}
+			System.out.println("Total Tickets Closed/Open Ratio: " + close + "/" + open);
+		}catch(SQLException e){
+			System.out.println("Problem reading in ticket: " + e);
+		}
+	}
+	
+	public static void displayOpenHighPriorityTickets(){
+		Dao d = new Dao();
+		ResultSet rs = d.getAllOpenHighPriorityTicketID();
+		List<Tickets> allTickets = new ArrayList<Tickets>();
+		System.out.println("Displaying open high priority tickets");
+		try{
+			while(rs.next()){
+				allTickets.add(d.getTicket(rs.getString("tid")));
+			}
+		}catch(SQLException e){
+			System.out.println("Problem reading in ticket: " + e);
+		}
+		
+		for(Tickets t:allTickets){
+			System.out.println(t.toString());
 		}
 	}
 }

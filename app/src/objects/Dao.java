@@ -57,10 +57,6 @@ public class Dao {
 			System.out.println("Database connection established...");
 		}catch(SQLException e){
 			System.out.println("Error Connecting to Database. Quitting. " + e);
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Error starting Connection");
-			alert.setHeaderText("WH WIFI PROBLEM");
-			alert.showAndWait();
 			System.exit(0);
 			
 		}
@@ -289,7 +285,7 @@ public class Dao {
 	}
 	
 	public ResultSet getAllTickets(String table, String columnNames){
-		String sql = "SELECT " + columnNames + " FROM " + table;
+		String sql = "SELECT " + columnNames + " FROM " + table + "";
 		ResultSet rs = null;
 		try{
 			startConnection();
@@ -355,6 +351,25 @@ public class Dao {
 			closeConnection();
 		}
 		return tic;
+	}
+	
+	public ResultSet getAllOpenHighPriorityTicketID(){
+		String sql = "SELECT tid FROM " + ticketsTable + " WHERE priority=3 and tid NOT IN (SELECT tid FROM " + ticketsTable + " WHERE status='Closed')";
+		ResultSet rs = null;
+		try{
+			startConnection();
+			System.out.println("Running select query...");
+			rs = stmt.executeQuery(sql);
+			
+			//rs will be closed later after it is printed out.
+			System.out.println("Query completed...");
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		}finally{
+			//closeConnection();
+		}
+		
+		return rs;
 	}
 	
 	/*
