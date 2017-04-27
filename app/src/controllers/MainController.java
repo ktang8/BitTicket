@@ -170,6 +170,8 @@ public class MainController extends ControllerHelper {
 		}catch(Exception e){
             e.printStackTrace();
             System.out.println("Error on Building Data"+ rs.toString());             
+        }finally{
+        	mm.closeConnection();
         }
 	}
 	public void toUserList(){
