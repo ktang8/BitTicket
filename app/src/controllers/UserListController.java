@@ -31,7 +31,7 @@ import objects.Tickets;
 import objects.Users;
 
 public class UserListController extends ControllerHelper {
-	public static Users selectedUser;
+	public static Users selectedUser=null;
 	@FXML
 	private Button logout;
 	@FXML
@@ -122,6 +122,7 @@ public void populateTable(TableView table, ResultSet rs){
 	// Event Listener on Button[#createUser].onAction
 	@FXML
 	public void createUser(ActionEvent event) {
+		UserListController.selectedUser = null;
 		Stage stage = (Stage) createUser.getScene().getWindow();
 		String view = "/views/UserView.fxml";
 		changeScene(stage,view);

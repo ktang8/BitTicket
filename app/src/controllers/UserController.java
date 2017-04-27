@@ -51,7 +51,7 @@ public class UserController extends ControllerHelper{
 	public void initialize(){
 		Users currentUser = LoginController.currentUser;
 		Users selectedUser = UserListController.selectedUser;
-		if(currentUser ==null){
+		if(currentUser ==null || selectedUser==null){
 			//new user
 			privLabel.setVisible(false);
 			privilege.setVisible(false);
@@ -99,8 +99,7 @@ public class UserController extends ControllerHelper{
 		ButtonType YES = new ButtonType("Yes");
 		ButtonType NO = new ButtonType("No");
 		alert.getButtonTypes().setAll(YES, NO);
-		
-		if(LoginController.currentUser==null){
+		if(LoginController.currentUser==null || UserListController.selectedUser==null){
 			alert.setTitle("Creating User");
 			alert.setHeaderText("Are you Sure you want to create User?");
 			Optional<ButtonType> result = alert.showAndWait();
@@ -108,7 +107,7 @@ public class UserController extends ControllerHelper{
 			if (result.get().getText().equals("Yes")){
 				Users u = new Users(username.getText(), password.getText(), firstName.getText(), lastName.getText(), 1, email.getText());
 				um.addUsers(u);
-	
+				
 				alert.setTitle("Created new User");
 				alert.setHeaderText(u.toString());
 				alert.getButtonTypes().setAll(new ButtonType("Ok"));
@@ -126,7 +125,7 @@ public class UserController extends ControllerHelper{
 			if (result.get().getText().equals("Yes")){
 				Users u = new Users(username.getText(), password.getText(), firstName.getText(), lastName.getText(), 1, email.getText());
 				um.updateQuery(um.usersTable, "username='" + u.getUsername() + "', pass='" + u.getPassword() + "', firstName='" + u.getFirstName() + "', lastName='" + u.getLastName() + "', privilege=" + u.getPrivilege() + ", email='" + u.getEmail() + "'", "pid=" + UserListController.selectedUser.getuID() + "");
-	
+
 				alert.setTitle("Update User");
 				alert.setHeaderText(u.toString());
 				alert.getButtonTypes().setAll(new ButtonType("Ok"));
