@@ -1,13 +1,16 @@
 package models;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import objects.Dao;
+import objects.Users;
 
 public class UserModel extends Dao {
 
-public ResultSet userRs(){
+	public ResultSet userRs(){
 		
 		String sql = "SELECT * FROM w_mei_users ORDER BY pid DESC";
 		ResultSet rs = null;

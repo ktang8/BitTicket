@@ -1,4 +1,9 @@
 package objects;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Users {
 	private int uID;
 	private String username;
@@ -11,9 +16,9 @@ public class Users {
 	public Users() {
 	}
 
-	public Users(String username, String password, String firstName, String lastName, int privilege, String email) {
+	public Users(String username, String password, String firstName, String lastName, int privilege, String email) throws NoSuchAlgorithmException {
 		this.username = username;
-		this.password = password;
+		this.password = hashPassword(password);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.privilege = privilege;
@@ -71,8 +76,15 @@ public class Users {
 	public String getEmail(){
 		return email;
 	}
-	public void setEmail(){
+	public void setEmail(String email){
 		this.email=email;
+	}
+	public String hashPassword(String pass) throws NoSuchAlgorithmException{
+		MessageDigest md = MessageDigest.getInstance("SHA-1");
+		md.update(pass.getBytes());
+	    BigInteger hash = new BigInteger(1, md.digest());
+	    String hashStr = hash.toString(16);
+	    return hashStr;
 	}
 
 	@Override

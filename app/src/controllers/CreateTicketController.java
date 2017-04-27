@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -84,11 +85,7 @@ public class CreateTicketController extends ControllerHelper{
 	
 	@FXML
 	public void logout() {
-		Stage stage = (Stage) logout.getScene().getWindow();
-		String view = "/views/LoginView.fxml";
-		changeScene(stage,view);
-		LoginController.currentUser = null;
-		
+		super.logout(logout);
 	}
 	
 	public void toTicketView(){

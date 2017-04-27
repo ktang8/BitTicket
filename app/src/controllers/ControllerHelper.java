@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class ControllerHelper {
@@ -23,5 +24,11 @@ public class ControllerHelper {
 		}
 	}
 	
+	public void logout(Button logout){
+		Stage stage = (Stage) logout.getScene().getWindow();
+		String view = "/views/LoginView.fxml";
+		changeScene(stage,view);
+		LoginController.currentUser = null;
+	}
 
 }

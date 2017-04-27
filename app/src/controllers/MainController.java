@@ -112,10 +112,7 @@ public class MainController extends ControllerHelper {
 	// Event Listener on Button[#logout].onAction
 	@FXML
 	public void logout(ActionEvent event) {
-		Stage stage = (Stage) logout.getScene().getWindow();
-		String view = "/views/LoginView.fxml";
-		changeScene(stage,view);
-		LoginController.currentUser = null;
+		super.logout(logout);
 	}
 	
 	@FXML
