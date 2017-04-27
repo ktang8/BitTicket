@@ -1,5 +1,6 @@
 package objects;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -210,13 +211,14 @@ public class Dao {
 			System.out.println("Inserting Rows into Table: " + usersTable);
 			 
 			// The sql query that will populate the database table BankRecords
-			String sql=	"INSERT INTO " + usersTable +" (username, pass, firstName, lastName, privilege) " +
+			String sql=	"INSERT INTO " + usersTable +" (username, pass, firstName, lastName, privilege, email) " +
 					"VALUES ('" +
 					 u.getUsername() + "', '" +
 					 u.getPassword() + "', '" + 
 					 u.getFirstName() + "', '" + 
 					 u.getLastName() + "', " + 
-					 u.getPrivilege() + ")";
+					 u.getPrivilege() + ", '" +
+					 u.getEmail() + "')";
 			startConnection();
 			stmt.execute(sql);
 			System.out.println("Insertion complete...");
@@ -288,9 +290,12 @@ public class Dao {
 			System.out.println("Query completed...");
 			if (rs.next()){
 				u = new Users(rs.getString("username"), rs.getString("pass"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("privilege"), rs.getString("email"));
+				u.setuID(rs.getInt("pid"));
 			}
 		} catch(SQLException e){
 			System.out.println(e.getMessage());
+		} catch (NoSuchAlgorithmException nsae) {
+			System.out.println("cannot get Users: " + nsae);
 		}finally{
 			closeConnection();
 		}

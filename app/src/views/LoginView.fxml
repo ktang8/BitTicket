@@ -16,6 +16,6 @@
       <Text layoutX="264.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticketing System" />
       <Text layoutX="300.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in" />
       <PasswordField fx:id="password" layoutX="293.0" layoutY="166.0" onAction="#onEnter" promptText="password" />
-      <Button fx:id="createUserButton" layoutX="369.0" layoutY="268.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="131.0" text="Create Account" />
+      <Button fx:id="createUserButton" layoutX="369.0" layoutY="268.0" mnemonicParsing="false" onAction="#createUser" prefHeight="31.0" prefWidth="131.0" text="Create Account" />
    </children>
 </AnchorPane>
