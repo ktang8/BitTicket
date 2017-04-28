@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 public class Dao {
 	final String url = "jdbc:mysql://www.papademas.net/tickets?autoReconnect=true&useSSL=false&user=fp411&password=411";
@@ -70,6 +73,10 @@ public class Dao {
 		System.out.println("Connection Closed");
 		}catch(SQLException e){
 			System.out.println("Connection cannot be closed.");
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Error starting Connection");
+			alert.setHeaderText("WH WIFI PROBLEM");
+			alert.showAndWait();
 			System.exit(0);
 		}
 	}
@@ -277,6 +284,25 @@ public class Dao {
 		return rs;
 	}
 	
+	public ResultSet getAllTickets(String table, String columnNames){
+		String sql = "SELECT " + columnNames + " FROM " + table + "";
+		ResultSet rs = null;
+		try{
+			startConnection();
+			System.out.println("Running select query...");
+			rs = stmt.executeQuery(sql);
+			
+			//rs will be closed later after it is printed out.
+			System.out.println("Query completed...");
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		}finally{
+			//closeConnection();
+		}
+		
+		return rs;
+	}
+	
 	public Users getUser(String username){
 		String sql = "SELECT * FROM " + usersTable + "  WHERE username='" + username + "'";
 		ResultSet rs = null;
@@ -325,6 +351,25 @@ public class Dao {
 			closeConnection();
 		}
 		return tic;
+	}
+	
+	public ResultSet getAllOpenHighPriorityTicketID(){
+		String sql = "SELECT tid FROM " + ticketsTable + " WHERE priority=3 and tid NOT IN (SELECT tid FROM " + ticketsTable + " WHERE status='Closed')";
+		ResultSet rs = null;
+		try{
+			startConnection();
+			System.out.println("Running select query...");
+			rs = stmt.executeQuery(sql);
+			
+			//rs will be closed later after it is printed out.
+			System.out.println("Query completed...");
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		}finally{
+			//closeConnection();
+		}
+		
+		return rs;
 	}
 	
 	/*
