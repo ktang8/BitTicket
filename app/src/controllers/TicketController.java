@@ -113,8 +113,8 @@ public class TicketController {
 		}else if(this.title.getText().length()<=0){
 			System.out.println("Title length cannot be empty");
 			return;
-		}else if(this.description.getText().length()>500){
-			System.out.println("Description length was greater than 250 char.");
+		}else if(this.description.getText().length()>1000){
+			System.out.println("Description length was greater than 1000 char.");
 			return;
 		}else if(this.description.getText().length()<=0){
 			System.out.println("Description length cannot be empty");
