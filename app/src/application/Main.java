@@ -65,6 +65,7 @@ public class Main extends Application {
 					break;
 				case "q":
 				case "Q":
+					System.out.println("program terminated");
 					return;
 				default:
 					System.out.println("Option: " + userInput + " not recognized.");
