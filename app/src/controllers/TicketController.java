@@ -32,7 +32,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
-public class TicketController {
+public class TicketController extends ControllerHelper{
 	@FXML
 	private Label currentFirstName;
 	@FXML
@@ -63,7 +63,8 @@ public class TicketController {
 	private ComboBox<String> status;
 	@FXML
 	private ComboBox<String> assignee;
-	
+	@FXML
+	private Label assigneeLabel;
 	@FXML
 	public void initialize() throws ParseException, SQLException {
 		currentFirstName.setText("Hi! " + LoginController.currentUser.getFirstName());
@@ -89,20 +90,28 @@ public class TicketController {
 		
 		TicketModel tm = new TicketModel();
 		Users submittedUser =tm.getSubmitterUser(submitter.getText());
+		Users currentUser = LoginController.currentUser;
 		edit.setDisable(false);
-		if((LoginController.currentUser.getPrivilege() > submittedUser.getPrivilege() || LoginController.currentUser.getUsername().equals(submittedUser.getUsername())&&LoginController.currentUser.getPrivilege()>1)){
+		if((currentUser.getPrivilege() > submittedUser.getPrivilege() || currentUser.getUsername().equals(submittedUser.getUsername())&&currentUser.getPrivilege()>1)){
 			//edit.setDisable(false);
 			description.setEditable(true);
 			title.setDisable(false);
 			status.setDisable(false);
 			category.setDisable(false);
 			priority.setDisable(false);
+		}else{
+			if(currentUser.getPrivilege()<=1){
+				assignee.setVisible(false);
+				assigneeLabel.setVisible(false);
+				deleteTicket.setVisible(false);
+			}
 		}
 		if(LoginController.currentUser.getPrivilege()>=3){
 			assignee.setDisable(false);
 			assignee.getItems().addAll(tm.getAllDevs());
 			deleteTicket.setDisable(false);
 		}
+		
 	}
 	
 	@FXML
@@ -162,34 +171,13 @@ public class TicketController {
 	@FXML
 	public void backToMainView() {
 		Stage stage = (Stage) back.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to go back to MainView: " + e);
-			
-		}
+		String view = "/views/MainView.fxml";
+		changeScene(stage,view);
 	}
 	
 	@FXML
 	public void logout() {
-		Stage stage = (Stage) logout.getScene().getWindow();
-		Parent root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("failed to logout: " + e);
-		}finally{
-			LoginController.currentUser = null;
-		}
+		super.logout(logout);
 	}
 	
 	@FXML

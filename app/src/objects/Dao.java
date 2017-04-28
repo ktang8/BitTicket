@@ -1,10 +1,14 @@
 package objects;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class Dao {
@@ -69,6 +73,10 @@ public class Dao {
 		System.out.println("Connection Closed");
 		}catch(SQLException e){
 			System.out.println("Connection cannot be closed.");
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Error starting Connection");
+			alert.setHeaderText("WH WIFI PROBLEM");
+			alert.showAndWait();
 			System.exit(0);
 		}
 	}
@@ -210,13 +218,14 @@ public class Dao {
 			System.out.println("Inserting Rows into Table: " + usersTable);
 			 
 			// The sql query that will populate the database table BankRecords
-			String sql=	"INSERT INTO " + usersTable +" (username, pass, firstName, lastName, privilege) " +
+			String sql=	"INSERT INTO " + usersTable +" (username, pass, firstName, lastName, privilege, email) " +
 					"VALUES ('" +
 					 u.getUsername() + "', '" +
 					 u.getPassword() + "', '" + 
 					 u.getFirstName() + "', '" + 
 					 u.getLastName() + "', " + 
-					 u.getPrivilege() + ")";
+					 u.getPrivilege() + ", '" +
+					 u.getEmail() + "')";
 			startConnection();
 			stmt.execute(sql);
 			System.out.println("Insertion complete...");
@@ -275,6 +284,25 @@ public class Dao {
 		return rs;
 	}
 	
+	public ResultSet getAllTickets(String table, String columnNames){
+		String sql = "SELECT " + columnNames + " FROM " + table + "";
+		ResultSet rs = null;
+		try{
+			startConnection();
+			System.out.println("Running select query...");
+			rs = stmt.executeQuery(sql);
+			
+			//rs will be closed later after it is printed out.
+			System.out.println("Query completed...");
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		}finally{
+			//closeConnection();
+		}
+		
+		return rs;
+	}
+	
 	public Users getUser(String username){
 		String sql = "SELECT * FROM " + usersTable + "  WHERE username='" + username + "'";
 		ResultSet rs = null;
@@ -287,10 +315,13 @@ public class Dao {
 			//rs will be closed later after it is printed out.
 			System.out.println("Query completed...");
 			if (rs.next()){
-				u = new Users(rs.getString("username"), rs.getString("pass"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("privilege"));
+				u = new Users(rs.getString("username"), rs.getString("pass"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("privilege"), rs.getString("email"));
+				u.setuID(rs.getInt("pid"));
 			}
 		} catch(SQLException e){
 			System.out.println(e.getMessage());
+		} catch (NoSuchAlgorithmException nsae) {
+			System.out.println("cannot get Users: " + nsae);
 		}finally{
 			closeConnection();
 		}
@@ -320,6 +351,25 @@ public class Dao {
 			closeConnection();
 		}
 		return tic;
+	}
+	
+	public ResultSet getAllOpenHighPriorityTicketID(){
+		String sql = "SELECT tid FROM " + ticketsTable + " WHERE priority=3 and tid NOT IN (SELECT tid FROM " + ticketsTable + " WHERE status='Closed')";
+		ResultSet rs = null;
+		try{
+			startConnection();
+			System.out.println("Running select query...");
+			rs = stmt.executeQuery(sql);
+			
+			//rs will be closed later after it is printed out.
+			System.out.println("Query completed...");
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		}finally{
+			//closeConnection();
+		}
+		
+		return rs;
 	}
 	
 	/*
@@ -360,9 +410,5 @@ public class Dao {
 		closeConnection();
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new Dao();
-	}
 
 }

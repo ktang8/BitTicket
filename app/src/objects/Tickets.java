@@ -12,7 +12,6 @@ public class Tickets {
 	private String submitter;
 	private int priority;
 	private String category;
-	private List<Comments> lComments;
 	private String assignee;
 
 	public Tickets() {
@@ -96,14 +95,6 @@ public class Tickets {
 		this.priority = priority;
 	}
 
-	public List<Comments> getlComments() {
-		return lComments;
-	}
-
-	public void setlComments(List<Comments> lComments) {
-		this.lComments = lComments;
-	}
-
 	public String getCategory() {
 		return category;
 	}
@@ -124,6 +115,6 @@ public class Tickets {
 	public String toString() {
 		return "Tickets [tID=" + tID + ", dateCreated=" + dateCreated + ", lastUpdated=" + lastUpdated + ", status="
 				+ status + ", title=" + title + ", description=" + description + ", submitter=" + submitter
-				+ ", priority=" + priority + ", lComments=" + lComments + "]";
+				+ ", priority=" + priority + "]";
 	}
 }
